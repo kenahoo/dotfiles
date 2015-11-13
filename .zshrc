@@ -102,3 +102,13 @@ path+=~/perl5/bin
 brewbash=~/perl5/perlbrew/etc/bashrc
 [[ -e $brewbash ]] &&
   source $brewbash
+
+
+# Copy $1 to $2/$1, where $1 can include nested directories
+replicate () {
+    src=$1
+    dest=$2
+    destdir=$(dirname $2/$1)
+    mkdir -p $destdir
+    cp -r $src $destdir
+}
