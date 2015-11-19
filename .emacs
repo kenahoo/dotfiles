@@ -42,7 +42,6 @@
 ;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (savehist-mode 1)
-(tool-bar-mode -1)
 
 (add-to-list 'vc-handled-backends 'Git)
 
