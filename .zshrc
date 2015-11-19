@@ -68,5 +68,12 @@ replicate () {
     cp -r $src $destdir
 }
 
-
 source ~/.aliases
+
+unsetopt auto_name_dirs
+unsetopt auto_pushd
+unsetopt pushdminus
+
+autoload -U zmv
+
+export GPG_TTY=$(tty)
