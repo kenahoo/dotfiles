@@ -58,9 +58,8 @@
   (package-install 'use-package))
 (require 'use-package)
 
-
-(load-theme 'zenburn)
-
+(use-package zenburn-theme
+  :ensure t)
 
 (use-package markdown-mode
   :mode ("\\.markdown$" "\\.md$"))
