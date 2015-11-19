@@ -68,6 +68,12 @@
 (use-package graphviz-dot-mode
   :mode "\\.dot$")
 
+(use-package htmlize
+  :ensure t)
+
+(use-package php-mode
+  :mode ("\\.php\\'" "\\.inc\\'"))
+
 (use-package org
   :mode (("\\.org$" . org-mode))
   :ensure org-plus-contrib
@@ -114,7 +120,6 @@
      )
   )
 
-
 (global-set-key (kbd "M--") 'ess-smart-underscore)
 (global-set-key (kbd "C-/") 'comment-dwim)
 
@@ -123,7 +128,6 @@
      (ess-set-style 'GNU)))
 
 (require 'ess-site)
-(require 'htmlize)
 
 (defun render-datadoc ()
   (interactive)
