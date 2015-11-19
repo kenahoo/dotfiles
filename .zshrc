@@ -50,51 +50,6 @@ export PERL5LIB=~/perl5/lib/perl5
 export ACK_OPTIONS=--pager=less
 
 
-alias e=emacs
-alias ls='ls -F'
-alias lsl="ls -alF"
-alias j=jobs
-alias h=history
-alias up='tar -zxvf'
-alias top="top -u"
-alias ql='quicklook -p'
-
-# Git stuff
-alias s='git status'
-alias d='git diff'
-alias l='git lg'
-function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1 } : q{}' }
-function c () { x=$(git_ticket); git commit -m "$x$1" }
-
-
-if [[ "$(uname -s)" =~ "^CYGWIN" ]]; then
-    alias open=cygstart
-    alias pbcopy=putclip
-    alias pbpaste=getclip
-elif [[ "$(uname)" == "Darwin" ]]; then
-    # Already have it
-else
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-fi
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias cds="cd ~/src"
-alias cdd="cd ~/Downloads"
-
-alias cpan='perl -MCPAN -e shell'
-alias findproc='ps auxww | grep'
-alias mac2unix='perl -pi -e "s/\cM/\n/g"'
-alias dos2unix='perl -pi -e "s/\cM//g"'
-alias pert='perl -a -F/\\t/'
-
-alias R='R_HISTSIZE=10000 R --no-save --no-restore-data --quiet'
-
-hcat  () { hdfs dfs -cat $1 }
-hzcat () { hdfs dfs -cat $1 | bzcat }
-
 fpath=(~/.zfuncs $fpath)
 path[1,0]=$HOME/bin  # Prepend
 path+=~/perl5/bin
@@ -112,3 +67,6 @@ replicate () {
     mkdir -p $destdir
     cp -r $src $destdir
 }
+
+
+source ~/.aliases

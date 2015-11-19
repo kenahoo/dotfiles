@@ -1,5 +1,5 @@
 
-FILES=.Rprofile .emacs .gitconfig .zlogout .zshrc
+FILES=.Rprofile .emacs .gitconfig .zlogout .zshrc .aliases
 FILEZ=$(patsubst %,$(HOME)/%,$(FILES))
 
 install: $(FILEZ)
