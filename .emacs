@@ -74,6 +74,12 @@
   :ensure t
   :mode ("\\.php\\'" "\\.inc\\'"))
 
+(use-package ess-site
+  :ensure ess
+  :config
+  (progn
+    (ess-set-style 'GNU)))
+
 (use-package yaml-mode
   :ensure t)
 
@@ -125,12 +131,6 @@
 
 (global-set-key (kbd "M--") 'ess-smart-underscore)
 (global-set-key (kbd "C-/") 'comment-dwim)
-
-(eval-after-load "ess"
-  '(progn
-     (ess-set-style 'GNU)))
-
-(require 'ess-site)
 
 (defun render-datadoc ()
   (interactive)
