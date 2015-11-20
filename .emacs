@@ -72,7 +72,11 @@
   :ensure t)
 
 (use-package php-mode
+  :ensure t
   :mode ("\\.php\\'" "\\.inc\\'"))
+
+(use-package yaml-mode
+  :ensure t)
 
 (use-package org
   :mode (("\\.org$" . org-mode))
