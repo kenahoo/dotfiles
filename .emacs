@@ -82,6 +82,9 @@
 (use-package yaml-mode
   :ensure t)
 
+(use-package magit
+  :ensure t)
+
 (use-package org
   :mode (("\\.org$" . org-mode))
   :ensure org-plus-contrib
