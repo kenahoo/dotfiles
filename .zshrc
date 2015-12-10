@@ -13,6 +13,11 @@ unset LS_COLORS
 
 autoload -U colors && colors
 
+antigen bundle git
+antigen bundle zsh-users/zsh-completions src
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+
 ME=`hostname`
 if [[ "$ME" == 'Ken-MacBook.local' ]]; then
   MCOL=$fg[white]
