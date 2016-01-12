@@ -62,6 +62,7 @@
       :ensure t))
 
 (use-package markdown-mode
+  :ensure t
   :mode ("\\.markdown$" "\\.md$"))
 
 (use-package graphviz-dot-mode
