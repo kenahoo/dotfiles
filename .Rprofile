@@ -11,6 +11,10 @@ local({
     options(repos=c(CRAN=cran))
 })
 
+## HTTPS support
+if (!capabilities('libcurl'))
+    options(download.file.method = "curl")
+
 Sys.setenv(TZ='UTC')
 
 local({
