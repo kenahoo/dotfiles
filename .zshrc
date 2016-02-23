@@ -13,10 +13,13 @@ unset LS_COLORS
 
 autoload -U colors && colors
 
-antigen bundle git
-antigen bundle zsh-users/zsh-completions src
-antigen bundle zsh-users/zsh-syntax-highlighting
-
+antigen_file=/usr/local/Cellar/antigen/1/share/antigen.zsh
+if [[ -f $antigen_file ]]; then
+    source $antigen_file
+    antigen bundle git
+    antigen bundle zsh-users/zsh-completions src
+    antigen bundle zsh-users/zsh-syntax-highlighting
+fi
 
 ME=`hostname`
 if [[ "$ME" == 'Ken-MacBook.local' ]]; then
