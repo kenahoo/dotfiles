@@ -65,6 +65,10 @@
   :ensure t
   :mode ("\\.markdown$" "\\.md$"))
 
+(use-package cperl-mode
+  :ensure t
+  :mode ("\\.[pP]\\([Llm]\\|erl\\|od\\)$" "\\.t$"))
+
 (use-package graphviz-dot-mode
   :mode "\\.dot$")
 
@@ -82,9 +86,14 @@
     (ess-set-style 'GNU)))
 
 (use-package yaml-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.yaml$")
 
 (use-package magit
+  :ensure t)
+
+(use-package apache-mode
+  :mode "^\\.htaccess$"
   :ensure t)
 
 (use-package org
