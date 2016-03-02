@@ -28,11 +28,15 @@ else
   MCOL=$fg[green]
 fi
 
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '[%F{2}%b%f] '
+autoload -U is-at-least
+if is-at-least 4.3.9; then
+	autoload -Uz vcs_info
+	zstyle ':vcs_info:*' formats '[%F{2}%b%f] '
 
-setopt prompt_subst
-precmd () { vcs_info }
+	setopt prompt_subst
+	precmd () { vcs_info }
+fi
+
 PROMPT="[%{$MCOL%}%U%m%u:%B%~%b%{$reset_color%}] \${vcs_info_msg_0_}%# "
 PROMPT2="%{$MCOL%}%^> %{$reset_color%}"
 
