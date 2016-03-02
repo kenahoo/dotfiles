@@ -12,7 +12,7 @@ local({
 })
 
 ## HTTPS support
-if (!capabilities('libcurl'))
+if (!isTRUE(capabilities('libcurl')))
     options(download.file.method = "curl")
 
 Sys.setenv(TZ='UTC')
