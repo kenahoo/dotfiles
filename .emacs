@@ -77,7 +77,7 @@
 
 (use-package php-mode
   :ensure t
-  :mode ("\\.php\\'" "\\.inc\\'"))
+  :mode ("\\.php\\'" "\\.inc\\'" "\\.module$"))
 
 (use-package ess-site
   :ensure ess
