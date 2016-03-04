@@ -81,6 +81,7 @@
 
 (use-package ess-site
   :ensure ess
+  :commands R
   :config
   (progn
     (ess-set-style 'GNU)))
@@ -90,7 +91,8 @@
   :mode "\\.yaml$")
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :defer 2)
 
 (use-package apache-mode
   :mode "^\\.htaccess$"
