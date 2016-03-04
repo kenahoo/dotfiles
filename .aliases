@@ -1,4 +1,4 @@
-alias e=emacs
+alias e=$EDITOR
 alias j=jobs
 alias h=history
 function m { perl -MCPAN -e "print CPAN::Shell->format_result(q{Module}, q{$*})" }
