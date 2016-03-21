@@ -42,7 +42,7 @@ alias R='R_HISTSIZE=10000 R --no-save --no-restore-data --quiet'
 hcat  () { hdfs dfs -cat $1 }
 hzcat () { hdfs dfs -cat $1 | bzcat }
 
-if [[ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]]; then
+if [[ "$(uname -s | cut -c 1-6)" == "CYGWIN" ]]; then
     alias open=cygstart
     alias pbcopy=putclip
     alias pbpaste=getclip
