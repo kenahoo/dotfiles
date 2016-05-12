@@ -1,0 +1,15 @@
+{
+    "activateConsole" : "Cmd+2",
+    "activateSource" : "Cmd+1",
+    "commentUncomment" : "Cmd+/",
+    "consoleClear" : "",
+    "insertSection" : "",
+    "moveTabLeft" : "Ctrl+Home",
+    "moveTabRight" : "Ctrl+End",
+    "nextTab" : "Ctrl+PageDown",
+    "previousTab" : "Ctrl+PageUp",
+    "renameInFile" : "Shift+Cmd+R",
+    "sourceNavigateBack" : "Cmd+[",
+    "sourceNavigateForward" : "Cmd+]",
+    "switchFocusSourceConsole" : "Cmd+`"
+}
