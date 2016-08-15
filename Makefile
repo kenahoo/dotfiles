@@ -25,4 +25,3 @@ $(HOME)/%: %
 merge:
 	git merge-to Mac master
 	git merge-to Linux master
-	git merge-to MacBook Mac
