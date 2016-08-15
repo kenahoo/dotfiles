@@ -24,3 +24,11 @@ local({
     .libPaths(rLib)
     Sys.setenv(R_LIBS=rLib)  # See https://goo.gl/vhrpYj
 })
+
+
+options(
+  devtools.desc = list( Version = "0.1" ),
+  devtools.desc.author = "Ken Williams <kenahoo@gmail.com> [aut, cre]",
+  devtools.desc.suggests = 'testthat',
+  devtools.desc.license = 'MIT'
+)
