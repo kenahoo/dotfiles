@@ -19,6 +19,8 @@ Sys.setenv(TZ='UTC')
 
 local({
     majVer <- with(R.Version(), paste(major, sub("\\..+", "", minor), sep=".")) # e.g. "3.2"
-    .libPaths(Sys.glob(file.path('~/R/library', majVer)))
-    Sys.setenv(R_LIBS=.libPaths()[1])  # See https://goo.gl/vhrpYj
+    rLib <- path.expand(file.path('~/R/library', majVer))
+    if (!file.exists(rLib)) dir.create(rLib, recursive=TRUE)
+    .libPaths(rLib)
+    Sys.setenv(R_LIBS=rLib)  # See https://goo.gl/vhrpYj
 })
