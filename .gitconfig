@@ -18,7 +18,7 @@
 	binary = true
 	textconv = xlsx2csv
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 	ff = "!f() { git push . HEAD:$1; }; f"
 	changelog = log --pretty=format:'* %s [%h]\n'
 	lgnc = log --graph --pretty=format:'%h -%d %s (%cr) <%an>'
