@@ -9,6 +9,9 @@ check:
 		diff -u $(HOME)/$$f $$f ; \
 	done
 
+colorcheck:
+	make check | colordiff | less
+
 getlatest:
 	for i in $(FILES); do cp $(HOME)/$$i .; done
 
