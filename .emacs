@@ -79,9 +79,9 @@
 (use-package htmlize
   :ensure t)
 
-(use-package php-mode
+(use-package web-mode
   :ensure t
-  :mode ("\\.php\\'" "\\.inc\\'" "\\.module$"))
+  :mode ("\\.php\\'" "\\.inc\\'" "\\.module$" "\\.html$"))
 
 (use-package ess-site
   :ensure ess
