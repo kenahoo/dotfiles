@@ -20,7 +20,8 @@
  '(org-src-preserve-indentation t)
  '(show-paren-mode t)
  '(transient-mark-mode t)
- '(user-mail-address "kenahoo@gmail.com"))
+ '(user-mail-address "kenahoo@gmail.com")
+ '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
