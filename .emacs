@@ -236,3 +236,5 @@
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
+
+(setq-default indent-tabs-mode nil)
