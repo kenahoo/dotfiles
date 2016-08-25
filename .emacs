@@ -73,7 +73,8 @@
   :mode ("\\.[pP]\\([Llm]\\|erl\\|od\\)$" "\\.t$"))
 
 (use-package graphviz-dot-mode
-  :mode "\\.dot$")
+  :mode "\\.dot$"
+  :ensure t)
 
 (use-package htmlize
   :ensure t)
