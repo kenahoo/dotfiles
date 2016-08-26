@@ -52,3 +52,9 @@ else
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
 fi
+
+rchangelog() {
+    echo "NAME  " $(date)
+    echo "======================="
+    git changelog $1.. | cat
+}
