@@ -7,6 +7,7 @@
  '(custom-safe-themes
    (quote
     ("f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(ess-default-style (quote RStudio))
  '(inhibit-startup-screen t)
  '(org-alphabetical-lists t)
  '(org-html-postamble t)
