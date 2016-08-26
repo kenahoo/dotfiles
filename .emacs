@@ -20,6 +20,7 @@
  '(org-list-allow-alphabetical t)
  '(org-src-preserve-indentation t)
  '(show-paren-mode t)
+ '(tramp-chunksize 50)
  '(transient-mark-mode t)
  '(user-mail-address "kenahoo@gmail.com")
  '(web-mode-markup-indent-offset 2))
