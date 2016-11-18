@@ -9,6 +9,7 @@ alias s='git status'
 alias d='git diff'
 alias l='git lg'
 alias la='git lg --all'
+alias a='git add -p'
 function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1 } : q{}' }
 function c () { x=$(git_ticket); git commit -m "$x$1" }
 
@@ -34,6 +35,8 @@ alias cdg='cd ~/Documents/SIA'
 alias ls='ls -F'
 function lsl { ls -al $* | less -EX }
 alias top='top -u'
+
+alias mmv='noglob zmv -W'
 
 alias cpan='perl -MCPAN -e shell'
 alias pert='perl -a -F/\\t/'
