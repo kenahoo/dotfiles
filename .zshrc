@@ -49,7 +49,7 @@ bindkey ^W kill-region
 
 #export LC_ALL=C
 export PAGER=less
-export EDITOR=emacs
+export EDITOR='emacs -nw'
 
 for prog in src-hilite-lesspipe.sh ; do
     (( $+commands[$prog] )) || continue
