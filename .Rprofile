@@ -1,5 +1,7 @@
-options(deparse.max.lines=5)
-options(max.print=4999)
+if (interactive()) {
+   options(deparse.max.lines=5)
+   options(max.print=4999)
+}
 
 local({
     ## HTTPS requires R version 3.2 or better
