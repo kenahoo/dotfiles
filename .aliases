@@ -7,6 +7,7 @@ alias up='tar -zxvf'
 
 alias s='git status'
 alias d='git diff'
+alias ds='git diff --staged'
 alias l='git lg'
 alias la='git lg --all'
 alias a='git add -p'
@@ -22,6 +23,8 @@ alias look_storable='perl -d -MStorable -e '"'"'$x = retrieve(shift)'"'"
 alias fullword='grep ^\!*$ /usr/share/dict/web2'
 alias force='perl -le "sleep 1 while system @ARGV"'
 alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
+
+alias dr='docker run -it --rm'
 
 alias ..='cd ..'
 alias ...='cd ../..'
