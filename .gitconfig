@@ -22,7 +22,12 @@
 	ff = "!f() { git push . HEAD:$1; }; f"
 	changelog = log --pretty=format:'* %s [%h]\n'
 	lgnc = log --graph --pretty=format:'%h -%d %s (%cr) <%an>'
+	addnw = "!f() { git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -; }; f"
 	pushitgood = push --force-with-lease
+	pruneitgood = "!f() { \
+            git remote prune origin; \
+            git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \
+        }; f"
 	ll = !git lg --all
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 	alias = "!f() { perl -ne 'print if /\\[alias\\]/ ... /^\\[/' ~/.gitconfig; }; f"
