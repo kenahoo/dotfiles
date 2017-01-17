@@ -89,3 +89,8 @@ unsetopt pushdminus
 autoload -U zmv
 
 export GPG_TTY=$(tty)
+
+if [[ $OSTYPE == darwin* ]]; then
+    bindkey "^[[3~" delete-char
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+fi

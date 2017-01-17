@@ -37,8 +37,6 @@ alias cdg='cd ~/Documents/SIA'
 
 alias ls='ls -F'
 function lsl { ls -al $* | less -EX }
-alias top='top -u'
-
 alias mmv='noglob zmv -W'
 
 alias cpan='perl -MCPAN -e shell'
@@ -64,3 +62,19 @@ rchangelog() {
     echo "======================="
     git changelog $1.. | cat
 }
+
+
+if [[ $OSTYPE == darwin* ]]; then
+   alias top='top -u'
+   alias E='open -a Emacs'
+   alias showdots='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+   alias hidedots='defaults write com.apple.finder AppleShowAllFiles NO;  killall Finder /System/Library/CoreServices/Finder.app'
+
+   brewperms () {
+       BREW=/usr/local
+       for f ( $BREW $BREW/bin $BREW/share $BREW/share/man $BREW/share/man/man1 ) do
+	   sudo chgrp admin $f
+	   sudo chmod g+w $f
+       done
+   }
+fi
