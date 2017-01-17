@@ -9,10 +9,16 @@
     <keyboard-shortcut first-keystroke="meta alt w" />
   </action>
   <action id="CompareTwoFiles" />
+  <action id="Console.History.Browse">
+    <keyboard-shortcut first-keystroke="meta alt e" />
+    <keyboard-shortcut first-keystroke="shift meta h" />
+  </action>
   <action id="CopyPaths" />
   <action id="Diff.ShowDiff" />
   <action id="EditorCodeBlockEnd" />
+  <action id="EditorCodeBlockEndWithSelection" />
   <action id="EditorCodeBlockStart" />
+  <action id="EditorCodeBlockStartWithSelection" />
   <action id="EditorDeleteLine">
     <keyboard-shortcut first-keystroke="meta d" />
   </action>
@@ -20,7 +26,9 @@
     <keyboard-shortcut first-keystroke="ctrl k" />
   </action>
   <action id="EditorDuplicate" />
-  <action id="EditorIndentSelection" />
+  <action id="EditorIndentSelection">
+    <keyboard-shortcut first-keystroke="shift meta close_bracket" />
+  </action>
   <action id="EditorMatchBrace" />
   <action id="EditorScrollDown" />
   <action id="EditorScrollToCenter">
@@ -44,6 +52,9 @@
   </action>
   <action id="EditorToggleColumnMode">
     <keyboard-shortcut first-keystroke="shift meta 8" />
+  </action>
+  <action id="EditorUnindentSelection">
+    <keyboard-shortcut first-keystroke="shift meta open_bracket" />
   </action>
   <action id="EmacsStyleIndent">
     <keyboard-shortcut first-keystroke="tab" />
@@ -86,6 +97,11 @@
   <action id="IntroduceVariable">
     <keyboard-shortcut first-keystroke="shift meta l" />
   </action>
+  <action id="JumpToLastWindow">
+    <keyboard-shortcut first-keystroke="meta back_quote" />
+  </action>
+  <action id="MethodHierarchy" />
+  <action id="MethodHierarchy.BaseOnThisType" />
   <action id="MoveLineDown">
     <keyboard-shortcut first-keystroke="alt down" />
   </action>
@@ -140,6 +156,7 @@
   <action id="SwitchUp">
     <keyboard-shortcut first-keystroke="ctrl alt up" />
   </action>
+  <action id="ThePlugin.ShowGlobalSettings" />
   <action id="Vcs.UpdateProject" />
   <action id="ViewSource" />
 </keymap>
