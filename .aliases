@@ -111,3 +111,5 @@ if [[ $OSTYPE == darwin* ]]; then
        done
    }
 fi
+
+alias weather='ansiweather -l Minneapolis -u imperial'
