@@ -106,8 +106,8 @@ if [[ $OSTYPE == darwin* ]]; then
    brewperms () {
        BREW=/usr/local
        for f ( $BREW $BREW/bin $BREW/share $BREW/share/man $BREW/share/man/man1 ) do
-	   sudo chgrp admin $f
-	   sudo chmod g+w $f
+          sudo chgrp admin $f
+          sudo chmod g+w $f
        done
    }
 fi
