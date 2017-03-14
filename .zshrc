@@ -13,7 +13,7 @@ unset LS_COLORS
 
 autoload -U colors && colors
 
-antigen_file=/usr/local/share/antigen/antigen.zsh
+antigen_file=$(brew --prefix)/share/antigen/antigen.zsh
 if [[ -f $antigen_file ]]; then
     source $antigen_file
     antigen bundle git
