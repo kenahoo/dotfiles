@@ -11,6 +11,8 @@ alias ds='git diff --staged'
 alias l='git lg'
 alias la='git lg --all'
 alias a='git add -p'
+alias dup='git dup'
+
 function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1 } : q{}' }
 function c () { x=$(git_ticket); git commit -m "$x$1" }
 
