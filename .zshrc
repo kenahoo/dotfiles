@@ -19,6 +19,9 @@ if [[ -f $antigen_file ]]; then
     antigen bundle git
     antigen bundle zsh-users/zsh-completions src
     antigen bundle zsh-users/zsh-syntax-highlighting
+    antigen bundle eventi/noreallyjustfuckingstopalready
+    antigen bundle supercrabtree/k
+    antigen apply
 fi
 
 ME=`hostname`
