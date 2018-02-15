@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 alias e=$EDITOR
 alias j=jobs
 alias h=history
@@ -13,8 +15,8 @@ alias la='git lg --all'
 alias a='git add -p'
 alias dup='git dup'
 
-function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1 } : q{}' }
-function c () { x=$(git_ticket); git commit -m "$x$1" }
+function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1} : q{}' }
+function c () { x=$(git_ticket); git commit -m "$x $1" }
 
 alias mac2unix='perl -pi -e "tr/\r/\n/"'
 alias dos2unix='perl -pi -e "tr/\r//d"'
@@ -25,6 +27,13 @@ alias look_storable='perl -d -MStorable -e '"'"'$x = retrieve(shift)'"'"
 alias fullword='grep ^\!*$ /usr/share/dict/web2'
 alias force='perl -le "sleep 1 while system @ARGV"'
 alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
+
+jira () {
+    ticket=${1:-$(git_ticket)}
+    bb=${BB_URL:-http://example.com/jira}
+    # echo $bb/browse/$ticket
+    open $bb/browse/$ticket
+}
 
 alias dr='docker run -it --rm'
 
