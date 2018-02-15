@@ -30,9 +30,9 @@ alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
 
 jira () {
     ticket=${1:-$(git_ticket)}
-    bb=${BB_URL:-http://example.com/jira}
+    jira=${JIRA_URL:-http://example.com/jira}
     # echo $bb/browse/$ticket
-    open $bb/browse/$ticket
+    open $jira/browse/$ticket
 }
 
 alias dr='docker run -it --rm'
