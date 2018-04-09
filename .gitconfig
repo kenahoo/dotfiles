@@ -14,26 +14,41 @@
 	conflictstyle = diff3
 [push]
 	default = simple
+[pull]
+	prune = true
 [diff "xlsx"]
 	binary = true
 	textconv = xlsx2csv
+[diff "gz"]
+	textconv = gzcat
+	binary = true
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
 	ff = "!f() { git push . HEAD:$1; }; f"
-	changelog = log --pretty=format:'* %s [%h]\n'
-	lgnc = log --graph --pretty=format:'%h -%d %s (%cr) <%an>'
+	co = checkout
+	changelog = log --graph --no-color --pretty=format:'%s [%h]'
 	addnw = "!f() { git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -; }; f"
+	pushup = push -u origin HEAD
 	pushitgood = push --force-with-lease
-	pruneitgood = "!f() { \
-            git remote prune origin; \
-            git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \
+	pruneitgood = "!f() { \n\
+            git remote prune origin; \n\
+            git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \n\
         }; f"
 	ll = !git lg --all
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 	alias = "!f() { perl -ne 'print if /\\[alias\\]/ ... /^\\[/' ~/.gitconfig; }; f"
 	merge-to = "!f() { git checkout $1 && git merge $2 && git checkout -; }; f"
+	update = "!f() { git push . origin/$1:$1; }; f"
+	ignore = "!f() { set -f; for i in $@; do echo $i >> .gitignore; done; }; f"
 	dup = "diff @{upstream}"
+	freshen-to-develop = "!f() { git checkout $1 && git rebase 'origin/develop' && git pushitgood && git checkout -; }; f"
+	branch-owners = "for-each-ref --sort='-authordate' --format='%(committerdate:iso8601) %09 %(authorname) %09 %(refname:strip=2)' 'refs/remotes'"
+	push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+[diff "ansible-vault"]
+	textconv = ansible-vault view
+	cachetextconv = false

@@ -19,8 +19,6 @@ if [[ -f $antigen_file ]]; then
     antigen bundle git
     antigen bundle zsh-users/zsh-completions src
     antigen bundle zsh-users/zsh-syntax-highlighting
-    antigen bundle eventi/noreallyjustfuckingstopalready
-    antigen bundle supercrabtree/k
     antigen apply
 fi
 
@@ -66,8 +64,15 @@ export ACK_OPTIONS=--pager=less
 
 
 fpath=(~/.zfuncs $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
 path+=~/perl5/bin
+path+=~/git/utils/perl
+path+=~/git/utils/git
+path+=/Developer/NVIDIA/CUDA-8.0/bin
+path+=/usr/local/sbin
+
+export DYLD_LIBRARY_PATH="/Developer/NVIDIA/CUDA-8.0/lib:$DYLD_LIBRARY_PATH"
 
 brewbash=~/perl5/perlbrew/etc/bashrc
 [[ -e $brewbash ]] &&
@@ -88,6 +93,7 @@ source ~/.aliases
 unsetopt auto_name_dirs
 unsetopt auto_pushd
 unsetopt pushdminus
+setopt   pushd_ignore_dups
 
 autoload -U zmv
 

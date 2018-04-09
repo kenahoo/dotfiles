@@ -19,6 +19,9 @@
  '(org-html-preamble-format (quote (("en" ""))))
  '(org-list-allow-alphabetical t)
  '(org-src-preserve-indentation t)
+ '(package-selected-packages
+   (quote
+    (flycheck flymake-json json-mode org zenburn-theme yaml-mode web-mode use-package scala-mode php-mode org-plus-contrib markdown-toc magit htmlize graphviz-dot-mode gitconfig-mode esup ess dockerfile-mode confluence benchmark-init apache-mode)))
  '(show-paren-mode t)
  '(tramp-chunksize 50)
  '(transient-mark-mode t)
@@ -35,6 +38,8 @@
  '(diff-removed-face ((t (:foreground "red"))))
 
 (setq exec-path (append exec-path '("/usr/local/bin")))
+(add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'exec-path "/Library/TeX/texbin")
 
 (add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 100))
@@ -80,11 +85,24 @@
   :ensure t)
 
 (use-package htmlize
-  :ensure t)
+  :ensure t
+  :defer t)
+
+;; (use-package c++-mode
+;;   :mode (".glm$"))
+
+(use-package php-mode
+  :ensure t
+  :mode ("\\.php\\'" "\\.inc\\'"))
+
+(use-package json-mode
+  :ensure t
+  :mode ("\\.json$"))
+
 
 (use-package web-mode
   :ensure t
-  :mode ("\\.php\\'" "\\.inc\\'" "\\.module$" "\\.html$"))
+  :mode "\\.html\\'")
 
 (use-package ess-site
   :ensure ess
@@ -97,9 +115,9 @@
   :ensure t
   :mode "\\.yaml$")
 
-(use-package magit
-  :ensure t
-  :defer 2)
+;; (use-package magit
+;;   :ensure t
+;;   :defer 2)
 
 (use-package apache-mode
   :mode "^\\.htaccess$"
