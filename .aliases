@@ -16,7 +16,10 @@ alias a='git add -p'
 alias dup='git dup'
 alias gd='git checkout develop'
 
-function git_ticket () { git rev-parse --abbrev-ref HEAD | perl -ne 'print m{(?:^|/)([A-Z]+-\d+)} ? qq{$1} : q{}' }
+function git_ticket () {
+    git rev-parse --abbrev-ref HEAD |
+	perl -ne 'print m{(?:^|/)([A-Z][A-Z0-9]+-\d+)} ? qq{$1} : q{}'
+}
 function c () { x=$(git_ticket); git commit -m "$x $1" }
 
 alias mac2unix='perl -pi -e "tr/\r/\n/"'
