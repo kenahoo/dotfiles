@@ -170,7 +170,12 @@
   )
 
 (global-set-key (kbd "M--") 'ess-smart-underscore)
-(global-set-key (kbd "C-/") 'comment-dwim)
+(global-set-key (kbd "s-/") 'comment-line)
+(global-set-key (kbd "s-d") 'kill-whole-line)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
+
 
 (defun render-datadoc ()
   (interactive)
