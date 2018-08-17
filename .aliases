@@ -39,6 +39,22 @@ jira () {
     open $jira/browse/$ticket
 }
 
+repo () {
+    remote=${1:-origin}
+    url=$(git remote show -n $remote 2>&1 | perl -ne 'print($1), last if /Fetch URL: (\S+)/')
+    echo $url
+
+    zmodload zsh/regex
+    if [[ $url -regex-match 'git@(gitlab.+):(.+)\.git$' ]]
+    then
+        url2="https://$match[1]/$match[2]"
+        echo $url2
+        open $url2
+    else
+        echo "Parse error"
+    fi
+}
+
 alias dr='docker run -it --rm'
 
 alias ..='cd ..'
