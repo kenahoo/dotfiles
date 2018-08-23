@@ -41,18 +41,19 @@ jira () {
 
 repo () {
     remote=${1:-origin}
-    url=$(git remote show -n $remote 2>&1 | perl -ne 'print($1), last if /Fetch URL: (\S+)/')
+    url=$(git config remote.$remote.url)
     echo $url
 
     zmodload zsh/regex
-    if [[ $url -regex-match 'git@(gitlab.+):(.+)\.git$' ]]
+    if [[ $url -regex-match 'git@([^:]+):(.+)\.git$' ]]
     then
         url2="https://$match[1]/$match[2]"
         echo $url2
         open $url2
-    else
-        echo "Parse error"
+        return
     fi
+
+    echo "Can't map remote URL '${url}' to web"
 }
 
 alias dr='docker run -it --rm'
