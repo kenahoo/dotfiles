@@ -59,20 +59,12 @@ for prog in src-hilite-lesspipe.sh ; do
 done
 
 export LESS=-eiMqR
-export PERL5LIB=~/perl5/lib/perl5
 export ACK_OPTIONS=--pager=less
 
 
 fpath=(~/.zfuncs $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
 path+=~/perl5/bin
-path+=~/git/utils/perl
-path+=~/git/utils/git
-path+=/Developer/NVIDIA/CUDA-8.0/bin
-path+=/usr/local/sbin
-
-export DYLD_LIBRARY_PATH="/Developer/NVIDIA/CUDA-8.0/lib:$DYLD_LIBRARY_PATH"
 
 brewbash=~/perl5/perlbrew/etc/bashrc
 [[ -e $brewbash ]] &&
