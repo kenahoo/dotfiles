@@ -4,13 +4,7 @@ if (interactive()) {
 }
 
 local({
-    ## HTTPS requires R version 3.2 or better
-    if (getRversion() >= '3.2') {
-        cran <- "https://cran.revolutionanalytics.com"
-    } else {
-        cran <- "http://cran.revolutionanalytics.com"
-    }
-    options(repos=c(CRAN=cran))
+  options(repos=c(CRAN="https://cran.revolutionanalytics.com"))
 })
 
 ## HTTPS support
@@ -36,3 +30,6 @@ options(
   devtools.desc.suggests = 'testthat',
   devtools.desc.license = 'MIT'
 )
+
+# Useful for getting longer dput() output, etc.
+# options('deparse.max.lines'=30)
