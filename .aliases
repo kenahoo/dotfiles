@@ -92,7 +92,7 @@ fi
 rchangelog() {
     echo "Version XX  " $(date)
     echo "---------------------------"
-    git changelog --graph $1.. | cat
+    git --no-pager changelog $1..
 }
 
 aws_address_cluster () {
