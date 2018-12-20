@@ -130,3 +130,10 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 alias weather='ansiweather -l Minneapolis -u imperial'
+
+
+binary_diff () {
+    hexdump -C $1 > /tmp/${1:t}
+    hexdump -C $2 > /tmp/${2:t}
+    git diff "$@[3,-1]" --no-index /tmp/${1:t} /tmp/${2:t}
+}
