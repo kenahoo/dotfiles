@@ -7,6 +7,7 @@ function m { perl -MCPAN -e "print CPAN::Shell->format_result(q{Module}, q{$*})"
 alias t='Build test --test_files'
 alias up='tar -zxvf'
 
+# Git-related aliases
 alias s='git status'
 alias d='git diff'
 alias ds='git diff --staged'
@@ -14,6 +15,7 @@ alias l='git lg'
 alias la='git lg --all'
 alias a='git add -p'
 alias dup='git dup'
+alias co='git checkout'
 alias gd='git checkout develop'
 
 function git_ticket () {
