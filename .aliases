@@ -18,9 +18,14 @@ alias dup='git dup'
 alias co='git checkout'
 alias gd='git checkout develop'
 
+# Print the current branch name
+function git_branch() {
+    git rev-parse --abbrev-ref HEAD | tr -d '\n'
+}
+
+# Parse the JIRA ticket string out of the Git branch name
 function git_ticket () {
-    git rev-parse --abbrev-ref HEAD |
-	perl -ne 'print m{(?:^|/)([A-Z][A-Z0-9]+-\d+)} ? qq{$1} : q{}'
+    git_branch | perl -ne 'print m{(?:^|/)([A-Z][A-Z0-9]+-\d+)} ? qq{$1} : q{}'
 }
 function c () { x=$(git_ticket); git commit -m "$x $1" }
 
