@@ -168,6 +168,27 @@ fi
 alias weather='ansiweather -l Minneapolis -u imperial'
 
 
+# Use ffpmeg and imagemagick to quickly convert a .mov to a .gif.
+# Primarily used for quickly converting screencasts
+# into gifs (which can then be viewed online easily)
+mov2gif () {
+    # Seen at https://community.rstudio.com/t/is-there-a-way-to-record-code-typing-and-execution-as-a-video-gif-etc-in-rstudio/13614/8
+
+    if [ "$#" -eq 0 ]; then
+	echo "Usage: mov2gif input [output]"
+	return 1
+    fi
+
+    if [ "$#" -eq 1 ]; then
+	OUTPUT="${1%.mov}".gif
+    else
+	OUTPUT="$2"
+    fi
+
+    ffmpeg -i "$1" -r 20 -f image2pipe -vcodec ppm - | \
+	convert -delay 5 -fuzz 1% -layers Optimize -loop 0 - "${OUTPUT}"
+}
+
 binary_diff () {
     hexdump -C $1 > /tmp/${1:t}
     hexdump -C $2 > /tmp/${2:t}
