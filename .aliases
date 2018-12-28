@@ -48,9 +48,10 @@ alias fullword='grep ^\!*$ /usr/share/dict/web2'
 alias force='perl -le "sleep 1 while system @ARGV"'
 alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
 
+# Open JIRA in the browser to the ticket of the current Git branch
 jira () {
-    ticket=${1:-$(git_ticket)}
-    jira=${JIRA_URL:-http://example.com/jira}
+    local ticket=${1:-$(git_ticket)}
+    local jira=${JIRA_URL:-http://example.com/jira}
     # echo $bb/browse/$ticket
     open $jira/browse/$ticket
 }
@@ -122,6 +123,8 @@ else
     alias pbpaste='xsel --clipboard --output'
 fi
 
+
+# Print a bunch of changelog info that's helpful to writing an R 'NEWS' file or similar
 rchangelog() {
     echo "Version XX  " $(date)
     echo "---------------------------"
