@@ -27,7 +27,16 @@ function git_branch() {
 function git_ticket () {
     git_branch | perl -ne 'print m{(?:^|/)([A-Z][A-Z0-9]+-\d+)} ? qq{$1} : q{}'
 }
-function c () { x=$(git_ticket); git commit -m "$x $1" }
+
+# Commit staged changes, prepending JIRA ticket string to the message
+function c () {
+    x=$(git_ticket)
+    if [[ -n $x ]]; then
+        x="$x "
+    fi
+    git commit -m "$x$1"
+}
+
 
 alias mac2unix='perl -pi -e "tr/\r/\n/"'
 alias dos2unix='perl -pi -e "tr/\r//d"'
