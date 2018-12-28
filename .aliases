@@ -55,15 +55,32 @@ jira () {
     open $jira/browse/$ticket
 }
 
+# Open GitHub / GitLab / Bitbucket in the browser to the current repository & current branch
 repo () {
-    remote=${1:-origin}
-    url=$(git config remote.$remote.url)
+    local remote=${1:-origin}
+    local url=$(git config remote.$remote.url)
     echo $url
 
+    local branch=`git_branch`
+
     zmodload zsh/regex
+    if [[ -n $BITBUCKET_URL && $url -regex-match 'git@[a-zA-Z.]+:7999/(.+)/(.+).git$' ]]
+    then
+        url2="${BITBUCKET_URL}/projects/$match[1]/repos/$match[2]/browse"
+        if [[ $branch != 'HEAD' ]]; then
+            url2="${url2}?at=refs/heads/${branch}"
+        fi
+        echo $url2
+        open $url2
+        return
+    fi
+
     if [[ $url -regex-match 'git@([^:]+):(.+)\.git$' ]]
     then
-        url2="https://$match[1]/$match[2]"
+        local url2="https://$match[1]/$match[2]"
+        if [[ $branch != 'HEAD' ]]; then
+            url2="${url2}/tree/${branch}"
+        fi
         echo $url2
         open $url2
         return
