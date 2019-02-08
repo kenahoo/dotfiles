@@ -24,24 +24,47 @@
 	textconv = gzcat
 	binary = true
 [alias]
+        # A colored, reasonably terse view of the commit DAG
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
 	ff = "!f() { git push . HEAD:$1; }; f"
 	co = checkout
+
+        # Print a bunch of changelog info that's helpful to writing an R 'NEWS' file or similar
 	changelog = log --graph --no-color --pretty=format:'%s [%h]'
+
+        # Stage the changes in files without staging their whitespace changes
 	addnw = "!f() { git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -; }; f"
+
+        # When on a local branch with no counterpart in 'origin', push it to a new branch in 'origin' with the same name
 	pushup = push -u origin HEAD
+
+        # Force a branch push, taking care to avoid race conditions that would clobber other people's changes made in the
+        # meantime.  This does *not* make it impossible to clobber other people's work if you're not careful, so be careful!
 	pushitgood = push --force-with-lease
+
+        # Prune any dangling tracking branches, and any local branches that are supposed to sync to them
 	pruneitgood = "!f() { \n\
             git remote prune origin; \n\
             git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \n\
         }; f"
 	ll = !git lg --all
 	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+
+        # Show aliases in this file
 	alias = "!f() { perl -ne 'print if /\\[alias\\]/ ... /^\\[/' ~/.gitconfig; }; f"
+
 	merge-to = "!f() { git checkout $1 && git merge $2 && git checkout -; }; f"
+
+        # Get updates from a remote branch into its local counterpart.  Example: 'git update develop'.
 	update = "!f() { git push . origin/$1:$1; }; f"
+
+        # Add entries to '.gitignore' without openig an editor
 	ignore = "!f() { set -f; for i in $@; do echo $i >> .gitignore; done; }; f"
+
 	dup = "diff @{upstream}"
+
+        # Rebase a given branch on top of develop, then push with force.  This makes rebasing easier, which encourages
+        # rebasing-based workflows.  Use with care.
 	freshen-to-develop = "!f() { git checkout $1 && git rebase 'origin/develop' && git pushitgood && git checkout -; }; f"
 	branch-owners = "for-each-ref --sort='-authordate' --format='%(committerdate:iso8601) %09 %(authorname) %09 %(refname:strip=2)' 'refs/remotes'"
 	push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
