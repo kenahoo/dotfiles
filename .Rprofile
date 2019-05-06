@@ -15,12 +15,14 @@ Sys.setenv(TZ='UTC')
 
 # Configure per-user package library, e.g. ~/R/library/3.2/ :
 local({
+  if (!grepl("/(mini)?conda", R.home(), perl=TRUE)) {
     majVer <- with(R.Version(), paste(major, sub("\\..+", "", minor), sep=".")) # e.g. "3.2"
     localLib <- path.expand(file.path('~/R/library', majVer))
     if (!file.exists(localLib))
        dir.create(localLib, recursive=TRUE)
     .libPaths(localLib)
     Sys.setenv(R_LIBS=localLib)  # See https://goo.gl/vhrpYj
+  }
 })
 
 
