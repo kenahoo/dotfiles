@@ -7,7 +7,6 @@
 [core]
 	filemode = false
 	pager = less -S
-	excludesfile = ~/.gitignore_global
 [log]
 	decorate = short
 	date = relative
