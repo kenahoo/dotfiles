@@ -14,7 +14,7 @@
 [merge]
 	conflictstyle = diff3
 [push]
-	default = simple
+	default = upstream
 [pull]
 	prune = true
 [diff "xlsx"]
