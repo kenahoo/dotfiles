@@ -3,9 +3,13 @@ if (interactive()) {
    options(max.print=4999)
 }
 
-local({
-  options(repos=c(CRAN="https://cran.revolutionanalytics.com"))
-})
+options(
+  repos=c(CRAN="https://cran.revolutionanalytics.com"),
+  devtools.desc = list( Version = "0.1" ),
+  devtools.desc.author = "Ken Williams <kenahoo@gmail.com> [aut, cre]",
+  devtools.desc.suggests = 'testthat',
+  devtools.desc.license = 'MIT'
+)
 
 ## HTTPS support
 if (!isTRUE(capabilities('libcurl')) && Sys.which('wget') != '')
@@ -25,13 +29,6 @@ local({
   }
 })
 
-
-options(
-  devtools.desc = list( Version = "0.1" ),
-  devtools.desc.author = "Ken Williams <kenahoo@gmail.com> [aut, cre]",
-  devtools.desc.suggests = 'testthat',
-  devtools.desc.license = 'MIT'
-)
 
 # Useful for getting longer dput() output, etc.
 # options('deparse.max.lines'=30)
