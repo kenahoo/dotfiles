@@ -165,7 +165,11 @@ if [[ $OSTYPE == darwin* ]]; then
    }
 fi
 
-alias weather='ansiweather; ansiweather -F'
+weather () {
+    date
+    ansiweather
+    ansiweather -F
+}
 
 
 # Use ffpmeg and imagemagick to quickly convert a .mov to a .gif.
