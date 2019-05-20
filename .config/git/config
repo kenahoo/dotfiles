@@ -22,6 +22,9 @@
 [diff "gz"]
         textconv = gzcat
         binary = true
+[diff "ansible-vault"]
+        textconv = ansible-vault view
+        cachetextconv = false
 [alias]
         # A colored, reasonably terse view of the commit DAG
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
@@ -72,6 +75,3 @@
         clean = git-lfs clean -- %f
         smudge = git-lfs smudge -- %f
         required = true
-[diff "ansible-vault"]
-        textconv = ansible-vault view
-        cachetextconv = false
