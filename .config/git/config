@@ -67,7 +67,15 @@
 
         # Rebase a given branch on top of develop, then push with force.  This makes rebasing easier, which encourages
         # rebasing-based workflows.  Use with care.
-        freshen-to-develop = "!f() { git checkout $1 && git rebase 'origin/develop' && git pushitgood && git checkout -; }; f"
+        freshen-to-develop = "!f() { \
+                  [ $# -lt 1 ] && echo 'Usage: git freshen-to-develop <branch>' && exit 1; \
+                  git checkout $1 && git rebase 'origin/develop' && git pushitgood && git checkout -; }; f"
+
+        freshen = "!f() { \
+                  [ $# -lt 1 ] && echo 'Usage: git freshen <branch> [<onto-branch>]' && exit 1; \
+                  onto=${2:-develop}; \
+                  git checkout $1 && git rebase origin/$onto && git pushitgood && git checkout -; }; f"
+
         branch-owners = "for-each-ref --sort='-authordate' --format='%(committerdate:iso8601) %09 %(authorname) %09 %(refname:strip=2)' 'refs/remotes'"
         push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
 
