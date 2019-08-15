@@ -11,10 +11,6 @@ options(
   devtools.desc.license = 'MIT'
 )
 
-## HTTPS support
-if (!isTRUE(capabilities('libcurl')) && Sys.which('wget') != '')
-    options(download.file.method = "wget")
-
 Sys.setenv(TZ='UTC')
 
 # Configure per-user package library, e.g. ~/R/library/3.2/ :
