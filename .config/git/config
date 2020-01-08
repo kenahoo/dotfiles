@@ -14,7 +14,9 @@
         conflictstyle = diff3
 [push]
         default = upstream
-[pull]
+[stash]
+        showPatch = true
+[fetch]
         prune = true
 [diff "xlsx"]
         binary = true
@@ -22,14 +24,15 @@
 [diff "gz"]
         textconv = gzcat
         binary = true
+[diff "pandoc"]
+        textconv = pandoc --to=markdown
+        prompt = false
 [diff "ansible-vault"]
         textconv = ansible-vault view
         cachetextconv = false
 [alias]
         # A colored, reasonably terse view of the commit DAG
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
-        ff = "!f() { git push . HEAD:$1; }; f"
-        co = checkout
 
         # Print a bunch of changelog info that's helpful to writing an R 'NEWS' file or similar
         changelog = log --graph --no-color --pretty=format:'%s [%h]'
@@ -49,7 +52,7 @@
             git remote prune origin; \n\
             git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \n\
         }; f"
-        ll = !git lg --all
+
         graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
         # Show aliases in this file
