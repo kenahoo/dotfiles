@@ -4,11 +4,13 @@ if (interactive()) {
 }
 
 options(
-  repos=c(CRAN="https://cran.revolutionanalytics.com"),
+  useFancyQuotes = FALSE,
+  repos=c(CRAN="https://cran.rstudio.com"),
   devtools.desc = list( Version = "0.1" ),
   devtools.desc.author = "Ken Williams <kenahoo@gmail.com> [aut, cre]",
   devtools.desc.suggests = 'testthat',
-  devtools.desc.license = 'MIT'
+  devtools.desc.license = 'MIT',
+  width = as.integer(Sys.getenv("COLUMNS", 100))
 )
 
 Sys.setenv(TZ='UTC')
