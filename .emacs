@@ -115,9 +115,9 @@
   :ensure t
   :mode "\\.yaml$")
 
-;; (use-package magit
-;;   :ensure t
-;;   :defer 2)
+(use-package magit
+  :ensure t
+  :defer 2)
 
 (use-package apache-mode
   :mode "^\\.htaccess$"
@@ -170,10 +170,10 @@
   )
 
 (global-set-key (kbd "M--") 'ess-smart-underscore)
+(global-set-key (kbd "C-/") 'comment-dwim)
+
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-d") 'kill-whole-line)
-
-(global-set-key (kbd "C-x g") 'magit-status)
 
 
 
