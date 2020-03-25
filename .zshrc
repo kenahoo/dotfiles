@@ -32,7 +32,7 @@ fi
 autoload -U is-at-least
 if is-at-least 4.3.9; then
     autoload -Uz vcs_info
-    zstyle ':vcs_info:*' formats '[%F{2}%b%f] '
+    zstyle ':vcs_info:*' formats '[%F{2}%30>…>%b%>>%f] '
 
     setopt prompt_subst
     precmd () { vcs_info }
