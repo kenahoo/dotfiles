@@ -1,0 +1,4 @@
+This is the XDG config location, which is nice to use because it
+doesn't litter your home directory with so much stuff.  See
+https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+for some details.
