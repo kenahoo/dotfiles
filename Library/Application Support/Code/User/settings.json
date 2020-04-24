@@ -1,0 +1,13 @@
+{
+    "editor.renderIndentGuides": false,
+    "files.autoSave": "onFocusChange",
+    "editor.lineHeight": 14,
+    "workbench.colorTheme": "Monokai",
+    "editor.roundedSelection": false,
+    "editor.renderLineHighlight": "none",
+    "window.zoomLevel": 0,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'JetBrains Mono', Monaco, 'Courier New', monospace",
+    "julia.enableTelemetry": false,
+    "julia.enableCrashReporter": false
+}
