@@ -17,6 +17,7 @@ alias a='git add -p'
 alias dup='git dup'
 alias co='git checkout'
 alias gd='git checkout develop'
+alias gm='git checkout master'
 
 # Print the current branch name
 function git_branch() {
@@ -101,8 +102,18 @@ alias cdd='cd ~/Downloads'
 alias cds='cd ~/src'
 alias cdg='cd ~/Documents/SIA'
 
+mcd() {
+    mkdir -p $1 && cd $1
+}
+
+cdpop() {
+    # See https://superuser.com/questions/1565148/popd-for-cdr-based-directory-management-in-zsh/1565507#1565507
+    local dir="$PWD"
+    cdr
+    cdr -P $dir
+}
+
 alias ls='ls -F'
-function lsl { ls -al $* | less -EX }
 alias mmv='noglob zmv -W'
 
 alias cpan='perl -MCPAN -e shell'
@@ -166,9 +177,13 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 weather () {
+    local args=()
+    if [[ $# -gt 0 ]]; then
+        args=(-l $1)
+    fi
     date
-    ansiweather
-    ansiweather -F
+    ansiweather "${args[@]}"
+    ansiweather -F "${args[@]}"
 }
 
 
