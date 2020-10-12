@@ -19,6 +19,17 @@ alias co='git checkout'
 alias gd='git checkout develop'
 alias gm='git checkout master'
 
+PYTHON=~/miniconda3/bin/python3
+
+function venv () {
+    local dir="${1:-venv}"
+    ( command -v deactivate > /dev/null ) && deactivate
+    if [[ ! -d $dir ]]; then
+        "$PYTHON" -m virtualenv "$dir"
+    fi
+    . "$dir/bin/activate"
+}
+
 # Print the current branch name
 function git_branch() {
     git rev-parse --abbrev-ref HEAD | tr -d '\n'
