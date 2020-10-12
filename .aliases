@@ -112,6 +112,7 @@ alias cdm='cd ~/src/modules'
 alias cdd='cd ~/Downloads'
 alias cds='cd ~/src'
 alias cdg='cd ~/Documents/SIA'
+alias cdl='cdr -l'
 
 mcd() {
     mkdir -p $1 && cd $1
