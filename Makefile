@@ -17,6 +17,7 @@ getlatest:
 
 
 echo:
+	echo $(FILES)
 	echo $(FILEZ)
 
 $(HOME)/%: %
