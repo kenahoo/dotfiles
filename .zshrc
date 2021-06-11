@@ -69,12 +69,6 @@ export LESS=-eiMqR
 
 fpath=(~/.zfuncs $fpath)
 path[1,0]=$HOME/bin  # Prepend
-path+=~/perl5/bin
-
-# brewbash=~/perl5/perlbrew/etc/bashrc
-# [[ -e $brewbash ]] &&
-  # source $brewbash
-
 
 # Copy $1 to $2/$1, where $1 can include nested directories
 replicate () {
