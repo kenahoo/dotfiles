@@ -4,6 +4,9 @@ SAVEHIST=10000000
 setopt notify
 bindkey -e
 
+# https://github.com/ohmyzsh/ohmyzsh/issues/5642
+disable r
+
 zstyle :compinstall filename '/home/kwilliams/.zshrc'
 
 autoload -Uz compinit
