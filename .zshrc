@@ -66,8 +66,6 @@ for prog in src-hilite-lesspipe.sh ; do
 done
 
 export LESS=-eiMqR
-export ACK_OPTIONS=--pager=less
-
 
 fpath=(~/.zfuncs $fpath)
 path[1,0]=$HOME/bin  # Prepend
