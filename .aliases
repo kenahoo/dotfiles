@@ -18,6 +18,8 @@ alias dup='git dup'
 alias co='git checkout'
 alias gd='git checkout develop'
 alias gm='git checkout master'
+alias st='git stash'
+alias pig='git pruneitgood'
 
 PYTHON=~/miniconda3/bin/python3
 
@@ -25,7 +27,7 @@ function venv () {
     local dir="${1:-venv}"
     ( command -v deactivate > /dev/null ) && deactivate
     if [[ ! -d $dir ]]; then
-        "$PYTHON" -m virtualenv "$dir"
+        "$PYTHON" -m virtualenv --python "$PYTHON" "$dir"
     fi
     . "$dir/bin/activate"
 }
@@ -64,8 +66,9 @@ alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
 jira () {
     local ticket=${1:-$(git_ticket)}
     local jira=${JIRA_URL:-http://example.com/jira}
-    # echo $bb/browse/$ticket
-    open $jira/browse/$ticket
+    local url="$jira/browse/$ticket"
+    echo "$url"
+    open "$url"
 }
 
 # Open GitHub / GitLab / Bitbucket in the browser to the current repository & current branch
@@ -131,6 +134,8 @@ alias mmv='noglob zmv -W'
 alias cpan='perl -MCPAN -e shell'
 alias pert='perl -a -F/\\t/'
 alias R='R_HISTSIZE=10000 R --no-save --no-restore-data --quiet'
+
+alias pip-deps='pip install . && pip uninstall `python setup.py --name`'
 
 hcat  () { hdfs dfs -cat $1 }
 hzcat () { hdfs dfs -cat $1 | bzcat }
