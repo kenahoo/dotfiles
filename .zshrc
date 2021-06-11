@@ -51,6 +51,7 @@ setopt incappendhistory
 
 bindkey ^W kill-region
 
+# 'cdr' is better than 'pushd', see http://info2html.sourceforge.net/cgi-bin/info2html-demo/info2html?(zsh)Recent%2520Directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
@@ -68,6 +69,7 @@ done
 export LESS=-eiMqR
 
 fpath=(~/.zfuncs $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
 
 # Copy $1 to $2/$1, where $1 can include nested directories
@@ -94,3 +96,25 @@ if [[ $OSTYPE == darwin* ]]; then
     bindkey "^[[3~" delete-char
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 fi
+
+autoload -U +X bashcompinit && bashcompinit
+
+complete -o nospace -C /usr/local/bin/vault vault
+
+
+# Case insensitive match
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Group matches and describe.
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
