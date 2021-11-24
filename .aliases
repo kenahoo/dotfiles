@@ -120,6 +120,9 @@ docker-populate() {
     then
         echo "Cloning $repo into container"
         docker exec $container git clone "$repo" /tmp/repo
+        local branch=$(git rev-parse --abbrev-ref HEAD)
+        echo "Checking out $branch"
+        docker exec $container git -C /tmp/repo checkout $branch
     else
         echo "Not in a git repo, skipping clone"
     fi
