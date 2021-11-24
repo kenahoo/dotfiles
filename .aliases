@@ -75,18 +75,19 @@ jira () {
 repo () {
     local remote=${1:-origin}
     local url=$(git config remote.$remote.url)
-    echo $url
+    echo "Remote is $url"
 
     local branch=`git_branch`
 
     zmodload zsh/regex
+
     if [[ -n $BITBUCKET_URL && $url -regex-match 'git@[a-zA-Z.]+:7999/(.+)/(.+).git$' ]]
     then
         url2="${BITBUCKET_URL}/projects/$match[1]/repos/$match[2]/browse"
         if [[ $branch != 'HEAD' ]]; then
             url2="${url2}?at=refs/heads/${branch}"
         fi
-        echo $url2
+        echo "Opening $url2"
         open $url2
         return
     fi
@@ -94,15 +95,20 @@ repo () {
     if [[ $url -regex-match 'git@([^:]+):(.+)\.git$' ]]
     then
         local url2="https://$match[1]/$match[2]"
-        if [[ $branch != 'HEAD' ]]; then
-            url2="${url2}/tree/${branch}"
-        fi
-        echo $url2
-        open $url2
-        return
+    elif [[ $url -regex-match 'https:\/\/(.+)\.git$' ]]
+    then
+        local url2="https://$match[1]"
+    else
+        echo "Can't map remote URL '${url}' to web"
+        exit 1
     fi
 
-    echo "Can't map remote URL '${url}' to web"
+    if [[ $branch != 'HEAD' ]]; then
+        url2="${url2}/tree/${branch}"
+    fi
+
+    echo "Opening $url2"
+    open $url2
 }
 
 docker-populate() {
