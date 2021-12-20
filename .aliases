@@ -21,6 +21,13 @@ alias gm='git checkout master'
 alias st='git stash'
 alias pig='git pruneitgood'
 
+
+function conflicts() {
+    # See https://zsh.sourceforge.io/FAQ/zshfaq03.html
+    ${=EDITOR} $(git diff --name-only --diff-filter=U)
+}
+
+
 PYTHON=~/miniconda3/bin/python3
 
 function venv () {
