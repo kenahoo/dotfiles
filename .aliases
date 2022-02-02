@@ -3,7 +3,6 @@
 alias e=$EDITOR
 alias j=jobs
 alias h=history
-function m { perl -MCPAN -e "print CPAN::Shell->format_result(q{Module}, q{$*})" }
 alias t='Build test --test_files'
 alias up='tar -zxvf'
 
@@ -64,7 +63,6 @@ alias dos2unix='perl -pi -e "tr/\r//d"'
 alias javastring='mac2unix | perl -pe '"'"'BEGIN{print q/"/}; s/"/\\"/g; s/\n/\\n" +\n"/g; END {print q/"/}'"'"
 alias findproc='ps auxww|grep'
 alias test1='make test TEST_FILES=\!:1 TEST_VERBOSE=1'
-alias look_storable='perl -d -MStorable -e '"'"'$x = retrieve(shift)'"'"
 alias fullword='grep ^\!*$ /usr/share/dict/web2'
 alias force='perl -le "sleep 1 while system @ARGV"'
 alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
