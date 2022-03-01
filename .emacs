@@ -175,6 +175,10 @@
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-d") 'kill-whole-line)
 
+(global-set-key (kbd "C-c <up>") 'smerge-keep-upper)
+(global-set-key (kbd "C-c <down>") 'smerge-keep-lower)
+(global-set-key (kbd "C-c <left>") 'smerge-keep-base)
+(global-set-key (kbd "C-c <right>") 'smerge-keep-all)
 
 
 (defun render-datadoc ()
