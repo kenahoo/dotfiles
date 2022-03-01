@@ -267,5 +267,8 @@
 
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "\e <up>") 'move-line-up)
+(global-set-key (kbd "\e <down>") 'move-line-down)
+
 
 (setq-default indent-tabs-mode nil)
