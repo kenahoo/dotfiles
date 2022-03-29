@@ -68,7 +68,7 @@ done
 
 export LESS=-eiMqR
 
-fpath=(~/.zfuncs $fpath)
+fpath=(~/.zfunc $fpath)
 fpath=(/usr/local/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
 
