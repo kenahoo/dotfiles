@@ -13,17 +13,7 @@ autoload -Uz compinit
 compinit
 
 unset LS_COLORS
-
 autoload -U colors && colors
-
-antigen_file=/usr/local/share/antigen/antigen.zsh
-if [[ -f $antigen_file ]]; then
-    source $antigen_file
-    antigen bundle git
-    antigen bundle zsh-users/zsh-completions src
-    antigen bundle zsh-users/zsh-syntax-highlighting
-    antigen apply
-fi
 
 ME=`hostname`
 if [[ "$ME" == 'Ken-MacBook.local' ]]; then
@@ -56,7 +46,6 @@ autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
 
-#export LC_ALL=C
 export PAGER=less
 export EDITOR='emacs -nw'
 
@@ -66,11 +55,33 @@ for prog in src-hilite-lesspipe.sh ; do
     break
 done
 
+
 export LESS=-eiMqR
 
 fpath=(~/.zfunc $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($brew/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
+
+if [ -d "/opt/homebrew" ]; then
+    brew="/opt/homebrew"
+else
+    brew="/usr/local"
+fi
+path=($brew/bin $brew/sbin $path)
+
+antigen_file="$brew/share/antigen/antigen.zsh"
+if [ -f $antigen_file ]; then
+    source $antigen_file
+    antigen bundle git
+    antigen bundle zsh-users/zsh-completions src
+    antigen bundle zsh-users/zsh-syntax-highlighting
+    antigen apply
+
+    typeset -A ZSH_HIGHLIGHT_STYLES
+    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=red,bold'
+else
+    echo "Antigen is not installed"
+fi
 
 # Copy $1 to $2/$1, where $1 can include nested directories
 replicate () {
@@ -99,7 +110,9 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 
-complete -o nospace -C /usr/local/bin/vault vault
+if [ -e "$brew/vault" ]; then
+    complete -o nospace -C "$brew/vault" vault
+fi
 
 
 # Case insensitive match
