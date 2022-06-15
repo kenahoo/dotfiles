@@ -17,6 +17,7 @@ alias dup='git dup'
 alias co='git checkout'
 alias gd='git checkout develop'
 alias gm='git checkout master'
+alias rd='git rebase origin/develop'
 alias st='git stash'
 alias pig='git pruneitgood'
 
