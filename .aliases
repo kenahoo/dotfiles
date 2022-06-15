@@ -67,6 +67,13 @@ alias fullword='grep ^\!*$ /usr/share/dict/web2'
 alias force='perl -le "sleep 1 while system @ARGV"'
 alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
 
+# Convert tabs to spaces inplace
+untab() {
+  [[ "$#" -ne "1" ]] && { echo "A single argument must be provided"; exit 1; }
+  tmp=`mktemp` && expand "$1" > "$tmp" && mv "$tmp" "$1"
+}
+alias detab=untab
+
 # Open JIRA in the browser to the ticket of the current Git branch
 jira () {
     local ticket=${1:-$(git_ticket)}
