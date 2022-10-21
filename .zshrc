@@ -2,15 +2,14 @@ HISTFILE=~/.histfile
 HISTSIZE=10000000
 SAVEHIST=10000000
 setopt notify
+
+# Emacs-like bindings
 bindkey -e
 
 # https://github.com/ohmyzsh/ohmyzsh/issues/5642
 disable r
 
-zstyle :compinstall filename '/home/kwilliams/.zshrc'
-
-autoload -Uz compinit
-compinit
+zstyle :compinstall filename "$HOME/.zshrc"
 
 unset LS_COLORS
 autoload -U colors && colors
@@ -55,21 +54,47 @@ for prog in src-hilite-lesspipe.sh ; do
     break
 done
 
-
 export LESS=-eiMqR
 
+add_paths () {
+    if [ -d "$1" ]; then
+        path=("$1/bin" "$1/sbin" $path)
+    fi
+}
+
+add_paths /usr/local
+add_paths /opt/homebrew
+
+
+if type brew &>/dev/null; then
+    _brew_home=$(brew --prefix)
+    FPATH=$_brew_home/share/zsh-completions:$FPATH
+
+    antigen_file="$_brew_home/share/antigen/antigen.zsh"
+
+    path=("$_brew_home/bin" "$_brew_home/sbin" $path)
+
+    autoload -Uz compinit
+    compinit
+
+    if [ -e "$_brew_home/vault" ]; then
+        complete -o nospace -C "$_brew_home/vault" vault
+    fi
+
+    if [ -e "$_brew_home/opt/asdf/libexec/asdf.sh" ]; then
+        . "$_brew_home/opt/asdf/libexec/asdf.sh"
+    fi
+
+fi
+
 fpath=(~/.zfunc $fpath)
-fpath=($brew/share/zsh-completions $fpath)
 path[1,0]=$HOME/bin  # Prepend
 
-if [ -d "/opt/homebrew" ]; then
-    brew="/opt/homebrew"
-else
-    brew="/usr/local"
-fi
-path=($brew/bin $brew/sbin $path)
 
-antigen_file="$brew/share/antigen/antigen.zsh"
+autoload -Uz compinit
+compinit
+
+
 if [ -f $antigen_file ]; then
     source $antigen_file
     antigen bundle git
@@ -114,9 +139,6 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 
-if [ -e "$brew/vault" ]; then
-    complete -o nospace -C "$brew/vault" vault
-fi
 
 
 # Case insensitive match
