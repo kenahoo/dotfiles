@@ -113,7 +113,7 @@ repo () {
         local url2="https://$match[1]"
     else
         echo "Can't map remote URL '${url}' to web"
-        exit 1
+        return 1
     fi
 
     if [[ $branch != 'HEAD' ]]; then
