@@ -272,3 +272,13 @@ binary_diff () {
     hexdump -C $2 > /tmp/${2:t}
     git diff "$@[3,-1]" --no-index /tmp/${1:t} /tmp/${2:t}
 }
+
+after () {
+    proc="$1"
+    shift
+    while true; do
+        ps -p "$proc" > /dev/null || break
+        sleep 1
+    done
+    eval "$@"
+}
