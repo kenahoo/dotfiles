@@ -28,6 +28,9 @@ function resolve() {
     ${=EDITOR} $(git diff --name-only --diff-filter=U)
 }
 
+function warn() {
+    echo "$1" >&2
+}
 
 PYTHON=~/miniconda3/bin/python3
 
@@ -48,6 +51,22 @@ function git_branch() {
 # Parse the JIRA ticket string out of the Git branch name
 function git_ticket () {
     git_branch | perl -ne 'print m{(?:^|/)([A-Z][A-Z0-9]+-\d+)} ? qq{$1} : q{}'
+}
+
+# Determine the numeric ID of the current repository in the gitlab server
+function gitlab_id () {
+    local remote
+    remote="$(git config remote.origin.url)" || return $?
+    [[ -z $remote ]] && { warn "Can't find remote URL"; return 1; }
+
+    local proj
+    proj="$(echo "$remote" | sed -E 's/.*:(.+)\.git\s*$/\1/')" || return $?
+    [[ -z $proj ]] && { warn "Can't parse url ${remote} to find project name"; return 1; }
+
+    local proj_id
+    proj_id="$(gitlab_api "/projects/$(printf "$proj" | jq -sRr @uri)" | jq .id )" || return $?
+
+    printf "$proj_id"
 }
 
 # Commit staged changes, prepending JIRA ticket string to the message
@@ -83,6 +102,42 @@ jira () {
     local url="$jira/browse/$ticket"
     echo "$url"
     open "$url"
+}
+
+# Run a query against the GitLab API.  Expects:
+#  * $GITLAB_URL to be set
+#  * ~/.gitlab-pat to contain personal access token
+# Prints the result on STDOUT.  Returns non-zero error code on failure.
+gitlab_api () {
+    [[ -z $1 ]] && { warn "Usage: gitlab_api <path>"; return 1; }
+    local query="$1"
+
+    local pat
+    pat="$(cat ~/.gitlab-pat)" || return $?
+
+    local result
+    result="$(curl --fail --no-progress-meter --header "PRIVATE-TOKEN: ${pat}" "${GITLAB_URL}/api/v4${query}")" || return $?
+
+    printf "%s" "$result"
+}
+
+# Goes to MR for the current branch, or reports that there isn't one
+mr () {
+    # TODO - if there's more than one MR for the named branch, let user pick which one
+    local branch
+    branch="$(git_branch)" || return $?
+    echo "Branch: $branch" >&2
+
+    local gl_id
+    gl_id="$(gitlab_id)" || return $?
+
+    local result
+    result="$(gitlab_api "/projects/${gl_id}/merge_requests?scope=all&state=opened&source_branch=${branch}" | jq -r '.[].web_url')" || return $?
+
+    [[ -z $result ]] && { warn "No MRs found in project ${gl_id} for branch '${branch}'"; return 1; }
+
+    echo "$result"
+    open "$result"
 }
 
 # Open GitHub / GitLab / Bitbucket in the browser to the current repository & current branch
