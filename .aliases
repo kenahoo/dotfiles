@@ -291,6 +291,12 @@ if [[ $OSTYPE == darwin* ]]; then
    }
 fi
 
+versions () {
+    # Usage: versions <package>
+    # Print all available versions of <package>
+    pip install -v "$1"== 2>&1 | sed -E 's/^ERROR:.*from (.*)\)/\1/p;d'
+}
+
 weather () {
     local args=()
     if [[ $# -gt 0 ]]; then
