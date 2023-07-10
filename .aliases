@@ -294,7 +294,22 @@ fi
 versions () {
     # Usage: versions <package>
     # Print all available versions of <package>
-    pip install -v "$1"== 2>&1 | sed -E 's/^ERROR:.*from (.*)\)/\1/p;d'
+
+    # TODO - add some command-line switches:
+    #  * --r look for R packages
+    #  * --python look for Python packages (default)
+    #  * -1 output one version per line
+    #  * --comma output comma-separated list (default)
+    #  * --match <spec> only versions matching spec (e.g. '>=2.5,<3.0' or '~=1.0')
+    local result
+    result=$(pip install -v "$1"== 2>&1)
+    {
+        echo "$result" | grep -q 'ERROR: Could not find'
+    } || {
+        warn "$result" && return 1
+    }
+
+    echo "$result" | sed -E 's/^ERROR: Could not find.*\(from (.*)\)/\1/p;d'
 }
 
 weather () {
