@@ -121,7 +121,7 @@ gitlab_api () {
     printf "%s" "$result"
 }
 
-# Goes to MR for the current branch, or reports that there isn't one
+# Goes to MR for the current branch, or reports that there isn't one and offers to help create one
 mr () {
     # TODO - if there's more than one MR for the named branch, let user pick which one
     local branch
@@ -134,7 +134,14 @@ mr () {
     local result
     result="$(gitlab_api "/projects/${gl_id}/merge_requests?scope=all&state=opened&source_branch=${branch}" | jq -r '.[].web_url')" || return $?
 
-    [[ -z $result ]] && { warn "No MRs found in project ${gl_id} for branch '${branch}'"; return 1; }
+    [[ -z $result ]] && {
+        warn "No MRs found in project ${gl_id} for branch '${branch}'"
+        local web_url
+        web_url="$(gitlab_api "/projects/${gl_id}" | jq -r .web_url)" && {
+            warn "To create a MR:\n  ${web_url}/-/merge_requests/new?merge_request%%5Bsource_branch%%5D=${branch}\n"
+        }
+        return 1
+    }
 
     echo "$result"
     open "$result"
