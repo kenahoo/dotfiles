@@ -83,7 +83,9 @@
 
         branch-owners = "for-each-ref --sort='-authordate' --format='%(committerdate:iso8601) %09 %(authorname) %09 %(refname:strip=2)' 'refs/remotes'"
         push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
-	unstage = reset
+        unstage = reset
+
+        fixup = commit --amend --no-edit
 
 [filter "lfs"]
         clean = git-lfs clean -- %f
