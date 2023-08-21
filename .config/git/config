@@ -87,6 +87,17 @@
 
         fixup = commit --amend --no-edit
 
+        # Show sizes of all files in the Git history.  Pipe to `tail` to just get biggest ones.
+        # See https://stackoverflow.com/q/10622179/169947 .
+        bigfiles = "!f() { \
+            git rev-list --objects --all | \
+            git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | \
+            sed -n 's/^blob //p' | \
+            sort --numeric-sort --key=2 | \
+            cut -c 1-12,41- | \
+            $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest; \
+          }; f"
+
 [filter "lfs"]
         clean = git-lfs clean -- %f
         smudge = git-lfs smudge -- %f
