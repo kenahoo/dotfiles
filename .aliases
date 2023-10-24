@@ -95,6 +95,12 @@ untab() {
 }
 alias detab=untab
 
+
+plist2json () {
+    # See https://stackoverflow.com/a/10991695/169947
+    plutil -convert json -o - "$1" | jq .
+}
+
 # Open JIRA in the browser to the ticket of the current Git branch
 jira () {
     local ticket=${1:-$(git_ticket)}
