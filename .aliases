@@ -217,6 +217,7 @@ docker-populate() {
 }
 
 alias dr='docker run -it --rm'
+alias dr-x86='dr --platform linux/amd64'
 
 alias ..='cd ..'
 alias ...='cd ../..'
