@@ -308,6 +308,14 @@ versions () {
     #  * -1 output one version per line
     #  * --comma output comma-separated list (default)
     #  * --match <spec> only versions matching spec (e.g. '>=2.5,<3.0' or '~=1.0')
+    if [[ $1 == "-r" ]]; then
+        versions-r "${@:2}"
+    else
+        versions-python "$@"
+    fi
+}
+
+versions-python () {
     local result
     result=$(pip install -v "$1"== 2>&1)
     {
@@ -317,6 +325,22 @@ versions () {
     }
 
     echo "$result" | sed -E 's/^ERROR: Could not find.*\(from (.*)\)/\1/p;d'
+}
+
+versions-r () {
+    local package="$1"
+    local repos repo rname rurl
+
+    repos=$(Rscript -e 'cat(unname(getOption("repos")), sep="\n")')
+    for repo in $repos; do
+        if [[ $repo =~ nexus ]]; then
+            rname=$(echo "$repo" | sed -E 's#.+/([^/]+)/?#\1#')
+            rurl=$(echo "$repo" | sed -E 's#^([^/]+:/+[^/]+)/?.*#\1#')
+            curl --silent -netrc "${rurl}/service/rest/v1/search?repository=${rname}&name=${package}" | jq -r '.items[].version' | perl -e "chomp(@x=<>); print '${rname}: ', join(q{, }, @x), qq{\n}"
+        else
+            echo "Not yet implemented for CRAN packages, skipping $repo" >&2
+        fi
+    done
 }
 
 weather () {
