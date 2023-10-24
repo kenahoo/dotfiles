@@ -389,4 +389,16 @@ after () {
         sleep 1
     done
     eval "$@"
+
+do_cmd () {
+    echo "$*[@]"
+    "$*[@]"
+}
+
+pyenv-new () {
+    local name
+    name=${1-"$(basename `pwd`)"}  # Default to name of current directory
+    do_cmd pyenv virtualenv 3.9.13 "$name"
+    do_cmd pyenv local "$name"
+    do_cmd cd .
 }
