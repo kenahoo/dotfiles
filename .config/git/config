@@ -98,6 +98,12 @@
             $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest; \
           }; f"
 
+        # Edit an existing annotated tag, or turn an existing un-annotated tag into an annotated tag
+        edit-tag = "!f() { \
+            [ $# -lt 1 ] && echo 'Usage: git edit-tag <tag>' && exit 1; \
+            git tag \"$1\" \"$1\"^{} -f -a; \
+          }; f"
+
 # [filter "lfs"]
 #        clean = git-lfs clean -- %f
 #        smudge = git-lfs smudge -- %f
