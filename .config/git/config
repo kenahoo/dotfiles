@@ -98,9 +98,10 @@
             $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest; \
           }; f"
 
-[filter "lfs"]
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        required = true
+# [filter "lfs"]
+#        clean = git-lfs clean -- %f
+#        smudge = git-lfs smudge -- %f
+#        required = true
+#        process = git-lfs filter-process
 [pull]
         rebase = true
