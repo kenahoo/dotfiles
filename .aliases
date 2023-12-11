@@ -15,12 +15,20 @@ alias la='git lg --all'
 alias a='git add -p'
 alias dup='git dup'
 alias co='git checkout'
-alias gd='git checkout develop'
-alias gm='git checkout $(git_main_branch)'
+alias gd='git checkout $(git_dev_branch)'
+alias gm='git checkout $(git_pub_branch)'
 alias git_main_branch='git branch -l master main'
 alias rd='git rebase origin/develop'
 alias st='git stash'
 alias pig='git pruneitgood'
+
+function git_dev_branch() {
+    git for-each-ref --format '%(refname:short)' 'refs/heads/dev/v*' 'refs/heads/develop' | head -n 1
+}
+
+function git_pub_branch() {
+    git for-each-ref --format '%(refname:short)' 'refs/heads/pub/v*' 'refs/heads/main' 'refs/heads/master' | head -n 1
+}
 
 
 function resolve() {
