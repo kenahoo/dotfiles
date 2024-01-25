@@ -404,6 +404,7 @@ after () {
         sleep 1
     done
     eval "$@"
+}
 
 do_cmd () {
     echo "$*[@]"
