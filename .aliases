@@ -332,7 +332,7 @@ versions () {
 
 versions-python () {
     local result
-    result=$(pip install -v "$1"== 2>&1)
+    result=$("$PYTHON" -m pip install -v "$1"== 2>&1)
     {
         echo "$result" | grep -q 'ERROR: Could not find'
     } || {
@@ -351,9 +351,14 @@ versions-r () {
         if [[ $repo =~ nexus ]]; then
             rname=$(echo "$repo" | sed -E 's#.+/([^/]+)/?#\1#')
             rurl=$(echo "$repo" | sed -E 's#^([^/]+:/+[^/]+)/?.*#\1#')
-            curl --silent -netrc "${rurl}/service/rest/v1/search?repository=${rname}&name=${package}" | jq -r '.items[].version' | perl -e "chomp(@x=<>); print '${rname}: ', join(q{, }, @x), qq{\n}"
+            curl --silent -netrc "${rurl}/service/rest/v1/search?repository=${rname}&name=${package}" | \
+                jq -r '.items[].version' | \
+                perl -e "chomp(@x=sort <>); print '${rname}: ', join(q{, }, @x), qq{\n}"
         else
-            echo "Not yet implemented for CRAN packages, skipping $repo" >&2
+            printf "CRAN: "
+            curl -s -o /tmp/archive.rds https://cran.rstudio.com/src/contrib/Meta/archive.rds && \
+                Rscript -e 'x <- readRDS("/tmp/archive.rds"); cat(sub(".+_(.+)\\\\.tar\\\\.gz", "\\\\1", rownames(x$'$package')), sep=", ")'
+            echo
         fi
     done
 }
