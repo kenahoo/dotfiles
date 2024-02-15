@@ -402,6 +402,9 @@ binary_diff () {
 }
 
 after () {
+    # Wait until the given process is done, then launch the given command
+    # Example:
+    #   after 1234 echo "Process 1234 is done"
     proc="$1"
     shift
     while true; do
