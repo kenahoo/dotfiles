@@ -3,7 +3,6 @@
 alias e=$EDITOR
 alias j=jobs
 alias h=history
-alias t='Build test --test_files'
 alias up='tar -zxvf'
 
 # Git-related aliases
@@ -21,6 +20,17 @@ alias git_main_branch='git branch -l master main'
 alias rd='git rebase origin/develop'
 alias st='git stash'
 alias pig='git pruneitgood'
+
+function t() {
+    # Run whatever testing framework seems to exist here
+    if [[ -e "tox.ini" ]]; then
+        tox --parallel=auto
+    elif [[ -e "DESCRIPTION" ]]; then
+        Rscript -e 'devtools::test()'
+    elif [[ -e "Build" ]]; then
+        Build test --test_files
+    fi
+}
 
 function git_dev_branch() {
     git for-each-ref --format '%(refname:short)' 'refs/heads/dev/v*' 'refs/heads/develop' | head -n 1
