@@ -17,7 +17,6 @@ alias co='git checkout'
 alias gd='git checkout $(git_dev_branch)'
 alias gm='git checkout $(git_pub_branch)'
 alias git_main_branch='git branch -l master main'
-alias rd='git rebase origin/develop'
 alias st='git stash'
 alias pig='git pruneitgood'
 
@@ -34,6 +33,11 @@ function t() {
 
 function git_dev_branch() {
     git for-each-ref --format '%(refname:short)' 'refs/heads/dev/v*' 'refs/heads/develop' | head -n 1
+}
+
+function rd() {
+    echo "Rebasing onto origin/$(git_dev_branch)" 1>&2
+    git rebase origin/$(git_dev_branch)
 }
 
 function git_pub_branch() {
