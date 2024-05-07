@@ -176,7 +176,7 @@ mr () {
 }
 
 # Open GitHub / GitLab / Bitbucket in the browser to the current repository & current branch
-repo () {
+function repo () {
     local remote=${1:-origin}
     local url=$(git config remote.$remote.url)
     echo "Remote is $url"
@@ -196,7 +196,7 @@ repo () {
         return
     fi
 
-    if [[ $url -regex-match 'git@([^:]+):(.+)\.git$' ]]
+    if [[ $url -regex-match '[-a-zA-Z0-9]+@([^:]+):(.+)\.git$' ]]
     then
         local url2="https://$match[1]/$match[2]"
     elif [[ $url -regex-match 'https:\/\/(.+)\.git$' ]]
