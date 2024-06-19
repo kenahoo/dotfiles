@@ -1,13 +1,41 @@
 {
-    "editor.renderIndentGuides": false,
+    "editor.guides.indentation": false,
     "files.autoSave": "onFocusChange",
     "editor.lineHeight": 14,
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Default Dark Modern",
     "editor.roundedSelection": false,
     "editor.renderLineHighlight": "none",
     "window.zoomLevel": 0,
     "editor.fontLigatures": true,
-    "editor.fontFamily": "'JetBrains Mono', Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "JetBrains Mono, Monaco, 'Courier New', monospace",
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "diffEditor.ignoreTrimWhitespace": false
+    },
     "julia.enableTelemetry": false,
-    "julia.enableCrashReporter": false
+    "julia.enableCrashReporter": false,
+    "editor.minimap.enabled": false,
+    "julia.execution.codeInREPL": true,
+    "workbench.editor.wrapTabs": true,
+    "julia.numTestProcesses": 0,
+    "editor.formatOnSave": true,
+    "editor.guides.highlightActiveIndentation": false,
+    "editor.scrollBeyondLastLine": false,
+    "workbench.colorCustomizations": {
+        "[*Dark*]": {
+            "tab.activeBackground": "#203a56",
+        },
+        "[*Light*]": {
+            "tab.activeBackground": "#d0d0f0",
+        },
+        "editorGhostText.foreground": "#ff0000"
+    },
+    "editor.wordBasedSuggestions": "off",
+    "terminal.integrated.scrollback": 1000000,
+    "window.autoDetectColorScheme": true,
+    "editor.lightbulb.enabled": "off",
+    "peacock.showColorInStatusBar": false,
+    "explorer.sortOrderLexicographicOptions": "upper",
 }
