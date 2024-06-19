@@ -1,21 +1,22 @@
 {
     "editor.guides.indentation": false,
     "files.autoSave": "onFocusChange",
-    "editor.lineHeight": 14,
-    "workbench.colorTheme": "Default Dark Modern",
     "editor.roundedSelection": false,
     "editor.renderLineHighlight": "none",
-    "window.zoomLevel": 0,
     "editor.fontLigatures": true,
     "editor.fontFamily": "JetBrains Mono, Monaco, 'Courier New', monospace",
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "julia.symbolCacheDownload": true,
     "[yaml]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.autoIndent": "advanced",
         "diffEditor.ignoreTrimWhitespace": false
     },
+    "git.openRepositoryInParentFolders": "always",
     "julia.enableTelemetry": false,
-    "julia.enableCrashReporter": false,
     "editor.minimap.enabled": false,
     "julia.execution.codeInREPL": true,
     "workbench.editor.wrapTabs": true,
@@ -33,9 +34,16 @@
         "editorGhostText.foreground": "#ff0000"
     },
     "editor.wordBasedSuggestions": "off",
-    "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.scrollback": 100000,
     "window.autoDetectColorScheme": true,
+    "workbench.editor.enablePreview": false,
     "editor.lightbulb.enabled": "off",
     "peacock.showColorInStatusBar": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "julia.liveTestFile": "TFOpt.jl/test/runtests.jl",
+    "files.exclude": {
+        "**/{src,test}/*.jl*.cov": true,
+        "**/coverage": true
+    },
     "explorer.sortOrderLexicographicOptions": "upper",
 }
