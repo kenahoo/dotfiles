@@ -34,7 +34,7 @@
         "editorGhostText.foreground": "#ff0000"
     },
     "editor.wordBasedSuggestions": "off",
-    "terminal.integrated.scrollback": 100000,
+    "terminal.integrated.scrollback": 1000000,
     "window.autoDetectColorScheme": true,
     "workbench.editor.enablePreview": false,
     "editor.lightbulb.enabled": "off",
@@ -46,4 +46,8 @@
         "**/coverage": true
     },
     "explorer.sortOrderLexicographicOptions": "upper",
+    "rewrap.wrappingColumn": 100,
+    "editor.hover.enabled": false,
+    "terminal.integrated.tabs.enabled": false,
+    "explorer.excludeGitIgnore": true,
 }
