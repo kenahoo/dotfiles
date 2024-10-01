@@ -64,7 +64,11 @@
             done | tail -n 1 \n\
         }; f"
 
-        graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+        graphviz = "!f() { \n\
+            echo 'digraph git {'\n\
+            git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' \n\
+            echo '}' \n\
+        }; f"
 
         # Show aliases in this file
         alias = "!f() { git --no-pager config --global --get-regex ^alias\\\\.${1}; }; f"
@@ -101,6 +105,7 @@
         # 'ss' = show stashes.  Show a log of all commits and all stashes.
         ss = "!git lg --all $(git reflog show --format='%h' stash)"
 
+        # Just add the staged changes to the last commit, no editing of the commit message.
         fixup = commit --amend --no-edit
 
         # Show sizes of all files in the Git history.  Pipe to `tail` to just get biggest ones.
