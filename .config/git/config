@@ -55,6 +55,15 @@
             git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \n\
         }; f"
 
+        # Determine the development head of this repository.  If there's not one, assume we're using mainline
+        # (main or master) development.  Handy for rebasing feature branches.
+        # See https://stackoverflow.com/questions/79040111/git-dont-sort-for-each-ref-output for ordering technique.
+        dev-branch = "!f() { \n\
+            for branch in 'refs/heads/master' 'refs/heads/main' 'refs/heads/develop' 'refs/heads/dev/v*'; do \n\
+                git for-each-ref --format '%(refname:short)' \"$branch\" \n\
+            done | tail -n 1 \n\
+        }; f"
+
         graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
         # Show aliases in this file
