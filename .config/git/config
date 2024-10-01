@@ -81,14 +81,18 @@
 
         # Rebase a given branch on top of develop, then push with force.  This makes rebasing easier, which encourages
         # rebasing-based workflows.  Use with care.
-        freshen-to-develop = "!f() { \
-                  [ $# -lt 1 ] && echo 'Usage: git freshen-to-develop <branch>' && exit 1; \
-                  git checkout $1 && git rebase 'origin/develop' && git pushitgood && git checkout -; }; f"
+        freshen-to-develop = "!f() { \n\
+            [ $# -lt 1 ] && echo 'Usage: git freshen-to-develop <branch>' && exit 1; \n\
+            git freshen $1 develop; \n\
+        }; f"
 
-        freshen = "!f() { \
-                  [ $# -lt 1 ] && echo 'Usage: git freshen <branch> [<onto-branch>]' && exit 1; \
-                  onto=${2:-develop}; \
-                  git checkout $1 && git rebase origin/$onto && git pushitgood && git checkout -; }; f"
+        # Same as 'freshen-to-develop', but caller can choose a different branch instead of develop.  Defaults
+        # to 'git dev-branch' result.
+        freshen = "!f() { \n\
+            [ $# -lt 1 ] && echo 'Usage: git freshen <branch> [<onto-branch>]' && exit 1; \n\
+            onto=${2:-$(git dev-branch)}; \n\
+            git checkout $1 && git rebase origin/$onto && git pushitgood && git checkout -; \n\
+        }; f"
 
         branch-owners = "for-each-ref --sort='-authordate' --format='%(committerdate:iso8601) %09 %(authorname) %09 %(refname:strip=2)' 'refs/remotes'"
         push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
