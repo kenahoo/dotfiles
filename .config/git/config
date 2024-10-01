@@ -43,7 +43,7 @@
         addnw = "!f() { git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -; }; f"
 
         # When on a local branch with no counterpart in 'origin', push it to a new branch in 'origin' with the same name
-        pushup = push -u origin HEAD
+        pushup = "!f() { git push -u ${1:-origin} HEAD; }; f"
 
         # Force a branch push, taking care to avoid race conditions that would clobber other people's changes made in the
         # meantime.  This does *not* make it impossible to clobber other people's work if you're not careful, so be careful!
