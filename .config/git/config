@@ -94,6 +94,9 @@
         push-status = "for-each-ref --format='%(align:width=26,position=left)%(push:track)%(end)%(refname:short)' refs/heads"
         unstage = reset
 
+        # 'ss' = show stashes.  Show a log of all commits and all stashes.
+        ss = "!git lg --all $(git reflog show --format='%h' stash)"
+
         fixup = commit --amend --no-edit
 
         # Show sizes of all files in the Git history.  Pipe to `tail` to just get biggest ones.
