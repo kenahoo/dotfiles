@@ -51,7 +51,7 @@
 
         # Prune any dangling tracking branches, and any local branches that are supposed to sync to them
         pruneitgood = "!f() { \n\
-            git remote prune origin; \n\
+            git remote prune ${1:-origin}; \n\
             git branch -vv | perl -nale 'system(qw(git branch -d), $F[0]) if $F[3] eq q{gone]}'; \n\
         }; f"
 
