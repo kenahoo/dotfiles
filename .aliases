@@ -35,6 +35,15 @@ function git_dev_branch() {
     git for-each-ref --format '%(refname:short)' 'refs/heads/dev/v*' 'refs/heads/develop' | head -n 1
 }
 
+function laa() {
+    git ss --color |
+        perl -pe 'BEGIN {
+            %m = (split " ", qx{git reflog show --format="%h %gd" stash});
+            $m = join "|", keys %m;
+          };
+          s/($m)(\x1b\[[0-9;]*m)? -/$1$2 - ${\($2?"\x1b\[93m":"")}($m{$1})${\($2?"\x1b\[m":"")}/g' | less
+}
+
 function rd() {
     echo "Rebasing onto origin/$(git_dev_branch)" 1>&2
     git rebase origin/$(git_dev_branch)
