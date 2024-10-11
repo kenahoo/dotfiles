@@ -32,7 +32,10 @@ function t() {
 }
 
 function git_dev_branch() {
-    git for-each-ref --format '%(refname:short)' 'refs/heads/dev/v*' 'refs/heads/develop' | head -n 1
+    # If there's no 'develop', then 'main' or 'master' is ok
+    for branch in 'refs/heads/master' 'refs/heads/main' 'refs/heads/develop' 'refs/heads/dev/v*'; do
+        git for-each-ref --format '%(refname:short)' "$branch"
+    done | tail -n 1
 }
 
 function laa() {
