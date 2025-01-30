@@ -125,6 +125,13 @@
             git tag \"$1\" \"$1\"^{} -f -a; \
           }; f"
 
+        # Grep through all stashes, from https://stackoverflow.com/a/57601163/169947
+        stashgrep = "!f() { \n\
+            for i in `git stash list --format=%gd`; do \n\
+                git stash show -p $i | grep -H --label=\"$i\" \"$@\"; \n\
+            done \n\
+          }; f"
+
 # [filter "lfs"]
 #        clean = git-lfs clean -- %f
 #        smudge = git-lfs smudge -- %f
