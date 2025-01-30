@@ -36,6 +36,9 @@
         # A colored, reasonably terse view of the commit DAG
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
 
+        # Edit the most recent commit message
+        reword = commit --amend
+
         # Print a bunch of changelog info that's helpful to writing an R 'NEWS' file or similar
         changelog = log --graph --no-color --pretty=format:'%s [%h]'
 
