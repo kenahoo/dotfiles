@@ -23,11 +23,17 @@ alias pig='git pruneitgood'
 function t() {
     # Run whatever testing framework seems to exist here
     if [[ -e "tox.ini" ]]; then
+        # Python
         tox --parallel=auto
     elif [[ -e "DESCRIPTION" ]]; then
+        # R
         Rscript -e 'devtools::test()'
+    elif [[ -e "Project.toml" ]]; then
+        # Julia
+        julia --project=. -e 'using Pkg; Pkg.test()'
     elif [[ -e "Build" ]]; then
-        Build test --test_files
+        # Perl
+        ./Build test --test_files
     fi
 }
 
