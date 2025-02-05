@@ -357,6 +357,8 @@ versions () {
     #  * --match <spec> only versions matching spec (e.g. '>=2.5,<3.0' or '~=1.0')
     if [[ $1 == "-r" ]]; then
         versions-r "${@:2}"
+    elif [[ $1 == "-j" ]]; then
+        versions-julia "${@:2}"
     else
         versions-python "$@"
     fi
@@ -393,6 +395,22 @@ versions-r () {
             echo
         fi
     done
+}
+
+versions-julia () {
+    local package="$1"
+    [[ "$#" -eq 1 ]] || {echo "Usage: $0 <pkg>" >&2; return 1}
+    [[ $package =~ ^[A-Za-z_0-9]+$ ]] || {echo "Malformed package name '$package'" >&2; return 2}
+    julia -e "
+        using Pkg
+        for r in Pkg.Registry.reachable_registries()
+          p = [p for p in values(r.pkgs) if p.name == \"$package\"]
+          isempty(p) && continue
+          println(\"Registry: \" * r.name)
+          vers = keys(Pkg.Registry.registry_info(only(p)).version_info)
+          join(Base.stdout, sort(string.(vers)), \", \")
+       end
+    "
 }
 
 weather () {
