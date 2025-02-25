@@ -287,7 +287,18 @@ alias cpan='perl -MCPAN -e shell'
 alias pert='perl -a -F/\\t/'
 alias R='R_HISTSIZE=10000 R --no-save --no-restore-data --quiet'
 
-alias pip-deps='pip install --use-feature=in-tree-build . && pip uninstall -y `python setup.py --name`'
+function pyproject-name () {
+    if [[ -e "pyproject.toml" ]]; then
+        yq .project.name pyproject.toml
+    elif [[ -e "setup.py" ]]; then
+        python setup.py --name
+    else
+        echo "No project file found" 2>&1
+    fi
+}
+alias pip-deps='pip install . && pip uninstall -y $(pyproject-name)'
+alias pip-uninstall-all='pip freeze | grep -v "^-e" | xargs pip uninstall -y'
+function pip-last () { pip install $1== 2>&1 | tail -c 2000 }
 
 hcat  () { hdfs dfs -cat $1 }
 hzcat () { hdfs dfs -cat $1 | bzcat }
