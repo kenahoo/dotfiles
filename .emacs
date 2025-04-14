@@ -91,6 +91,10 @@
   :ensure t
   :defer t)
 
+(use-package ssh-config-mode
+  :ensure t
+  :mode "\\.ssh/config$")
+
 ;; (use-package c++-mode
 ;;   :mode (".glm$"))
 
