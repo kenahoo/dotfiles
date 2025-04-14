@@ -79,6 +79,10 @@
   :ensure t
   :mode ("\\.markdown$" "\\.md$"))
 
+(use-package julia-mode
+  :ensure t
+  :mode "\\.jl$")
+
 (use-package cperl-mode
   :ensure t
   :mode ("\\.[pP]\\([Llm]\\|erl\\|od\\)$" "\\.t$"))
