@@ -104,7 +104,7 @@
 
 (use-package php-mode
   :ensure t
-  :mode ("\\.php\\'" "\\.inc\\'"))
+  :mode ("\\.php$" "\\.inc$"))
 
 (use-package json-mode
   :ensure t
@@ -113,7 +113,7 @@
 
 (use-package web-mode
   :ensure t
-  :mode "\\.html\\'")
+  :mode "\\.html$")
 
 (use-package ess-site
   :ensure ess
