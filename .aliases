@@ -19,6 +19,16 @@ alias gm='git checkout $(git_pub_branch)'
 alias git_main_branch='git branch -l master main'
 alias st='git stash'
 alias pig='git pruneitgood'
+alias gg='git grep --no-index'
+alias gdiff='git diff --no-index'
+
+
+function hgrep() {
+    # Grep, but also print header of each file
+    perl -e '$p = shift; while (<>) { print if /$p/o || $.==1 } continue { close ARGV if eof }' $@
+}
+
+alias jp='julia --project=.'
 
 function t() {
     # Run whatever testing framework seems to exist here
@@ -72,7 +82,13 @@ function warn() {
     echo "$1" >&2
 }
 
-PYTHON=~/miniconda3/bin/python3
+function just() {
+    if [[ -e ".mise.toml" ]]; then
+        mise task run "$@"
+    else
+        command just "$@"
+    fi
+}
 
 function venv () {
     local dir="${1:-venv}"
@@ -273,11 +289,11 @@ mcd() {
     mkdir -p $1 && cd $1
 }
 
-cdpop() {
+function cdpop() {
     # See https://superuser.com/questions/1565148/popd-for-cdr-based-directory-management-in-zsh/1565507#1565507
     local dir="$PWD"
     cdr
-    cdr -P $dir
+    cdr -P "$dir"
 }
 
 alias ls='ls -F'
@@ -427,7 +443,7 @@ versions-julia () {
 weather () {
     local args=()
     if [[ $# -gt 0 ]]; then
-        args=(-l $1)
+        args=(-l "$1")
     fi
     date
     ansiweather "${args[@]}"
