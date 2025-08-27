@@ -146,7 +146,8 @@ alias pbedit='pbpaste > /tmp/pb; e /tmp/pb; pbcopy < /tmp/pb'
 
 # Convert tabs to spaces inplace
 untab() {
-  [[ "$#" -ne "1" ]] && { echo "A single argument must be provided"; exit 1; }
+  # 'expand' seems to only work on physical files, not streams
+  [[ "$#" -ne "1" ]] && { echo "A single argument must be provided"; return 1; }
   tmp=`mktemp` && expand "$1" > "$tmp" && mv "$tmp" "$1"
 }
 alias detab=untab
