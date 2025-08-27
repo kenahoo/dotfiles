@@ -65,7 +65,7 @@ function laa() {
 
 function rd() {
     echo "Rebasing onto origin/$(git_dev_branch)" 1>&2
-    git rebase origin/$(git_dev_branch)
+    git rebase origin/$(git_dev_branch) "$@"
 }
 
 function git_pub_branch() {
