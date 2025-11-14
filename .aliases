@@ -408,8 +408,8 @@ versions-r () {
     local package="$1"
     local repos repo rname rurl
 
-    repos=$(Rscript -e 'cat(unname(getOption("repos")), sep="\n")')
-    for repo in $repos; do
+    repos=($(Rscript -e 'cat(unname(getOption("repos")), sep="\n")'))
+    for repo in "${repos[@]}"; do
         if [[ $repo =~ nexus ]]; then
             rname=$(echo "$repo" | sed -E 's#.+/([^/]+)/?#\1#')
             rurl=$(echo "$repo" | sed -E 's#^([^/]+:/+[^/]+)/?.*#\1#')
