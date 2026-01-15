@@ -435,8 +435,8 @@ versions-julia () {
           p = [p for p in values(r.pkgs) if p.name == \"$package\"]
           isempty(p) && continue
           println(\"Registry: \" * r.name)
-          vers = keys(Pkg.Registry.registry_info(only(p)).version_info)
-          join(Base.stdout, sort(string.(vers)), \", \")
+          vers = collect(keys(Pkg.Registry.registry_info(only(p)).version_info))
+          println(join(sort(vers), \", \"))
        end
     "
 }
