@@ -30,26 +30,26 @@ disable r
 zstyle :compinstall filename "$HOME/.zshrc"
 
 unset LS_COLORS
-autoload -U colors && colors
 
 ME=`hostname`
 if [[ "$ME" == 'Ken-MacBook.local' ]]; then
-  MCOL=$fg[white]
+    MCOL=white
 else
-  MCOL=$fg[green]
+    MCOL=green
 fi
 
 autoload -U is-at-least
 if is-at-least 4.3.9; then
     autoload -Uz vcs_info
-    zstyle ':vcs_info:*' formats '[%F{2}%30>…>%b%>>%f] '
+    zstyle ':vcs_info:*' formats '[%F{green}%30>…>%b%>>%f] '
 
     setopt prompt_subst
     precmd () { vcs_info }
 fi
 
-PROMPT="[%{$MCOL%}%U%m%u:%B%~%b%{$reset_color%}] \${vcs_info_msg_0_}%# "
-PROMPT2="%{$MCOL%}%^> %{$reset_color%}"
+PROMPT="[%F{$MCOL}%U%m%u:%B%~%b%f] \${vcs_info_msg_0_}%# "
+PROMPT2="%F{$MCOL}%^> %f"
+RPROMPT=""
 
 REPORTTIME=5
 
