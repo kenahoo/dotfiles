@@ -3,6 +3,24 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 setopt notify
 
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(
+    git
+    zsh-syntax-highlighting
+    mise
+    aws
+)
+
+# Skip some of oh-my-zsh's aliases
+zstyle ':omz:lib:directories' aliases no
+zstyle ':omz:lib:bzr' aliases no
+
+source $ZSH/oh-my-zsh.sh
+
+# Unset this from oh-my-zsh's defaults
+unsetopt share_history
+
 # Emacs-like bindings
 bindkey -e
 
@@ -80,33 +98,15 @@ if type brew &>/dev/null; then
     if [ -e "$_brew_home/vault" ]; then
         complete -o nospace -C "$_brew_home/vault" vault
     fi
-
-    if [ -e "$_brew_home/opt/asdf/libexec/asdf.sh" ]; then
-        . "$_brew_home/opt/asdf/libexec/asdf.sh"
-    fi
-
 fi
 
 fpath=(~/.zfunc $fpath)
 path[1,0]=$HOME/bin  # Prepend
 
 
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
 
-
-if [ -f $antigen_file ]; then
-    source $antigen_file
-    antigen bundle git
-    antigen bundle zsh-users/zsh-completions src
-    antigen bundle zsh-users/zsh-syntax-highlighting
-    antigen apply
-
-    typeset -A ZSH_HIGHLIGHT_STYLES
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=red,bold'
-else
-    echo "Antigen is not installed"
-fi
 
 # Copy $1 to $2/$1, where $1 can include nested directories
 replicate () {
