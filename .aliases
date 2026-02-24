@@ -387,6 +387,8 @@ versions () {
         versions-r "${@:2}"
     elif [[ $1 == "-j" ]]; then
         versions-julia "${@:2}"
+    elif [[ $1 == "-p" ]]; then
+        versions-python "${@:2}"
     else
         versions-python "$@"
     fi
@@ -394,7 +396,8 @@ versions () {
 
 versions-python () {
     local result
-    result=$("$PYTHON" -m pip install -v "$1"== 2>&1)
+    local py="${PYTHON:-python}"
+    result=$("$py" -m pip install -v "$1"== 2>&1)
     {
         echo "$result" | grep -q 'ERROR: Could not find'
     } || {
