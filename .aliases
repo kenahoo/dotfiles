@@ -131,7 +131,7 @@ function c () {
     if [[ -n $x ]]; then
         x="$x "
     fi
-    git commit -m "$x$1"
+    git commit -m "$x$1" "${@:2}"
 }
 
 
