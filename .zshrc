@@ -85,8 +85,6 @@ add_paths /usr/local
 
 
 if type brew &>/dev/null; then
-    antigen_file="$_brew_home/share/antigen/antigen.zsh"
-
     autoload -Uz compinit
     compinit
 
