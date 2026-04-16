@@ -10,6 +10,7 @@ plugins=(
     zsh-syntax-highlighting
     mise
     aws
+    brew
 )
 
 # Skip some of oh-my-zsh's aliases
@@ -81,16 +82,10 @@ add_paths () {
 }
 
 add_paths /usr/local
-add_paths /opt/homebrew
 
 
 if type brew &>/dev/null; then
-    _brew_home=$(brew --prefix)
-    FPATH=$_brew_home/share/zsh-completions:$FPATH
-
     antigen_file="$_brew_home/share/antigen/antigen.zsh"
-
-    path=("$_brew_home/bin" "$_brew_home/sbin" $path)
 
     autoload -Uz compinit
     compinit
