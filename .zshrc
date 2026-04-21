@@ -59,6 +59,25 @@ setopt incappendhistory
 
 bindkey ^W kill-region
 
+# ── Big-word navigation on Option+arrows ─────────────────────────
+# oh-my-zsh sets WORDCHARS='' so default movement is small (bash-like).
+# Use select-word-style to add whitespace-delimited big-word widgets
+# for Option+arrows, leaving everything else (kills, Ctrl+arrows) small.
+autoload -U select-word-style
+select-word-style bash
+
+# Create a couple aliases that can be styled independently
+zle -N my-forward-big-word forward-word-match
+zle -N my-backward-big-word backward-word-match
+zstyle ':zle:my-forward-big-word' word-style whitespace
+zstyle ':zle:my-backward-big-word' word-style whitespace
+
+# Override default bindings for 'forward-word' and 'backward-word'
+bindkey '^[f' my-forward-big-word
+bindkey '^[F' my-forward-big-word
+bindkey '^[b' my-backward-big-word
+bindkey '^[B' my-backward-big-word
+
 # 'cdr' is better than 'pushd', see http://info2html.sourceforge.net/cgi-bin/info2html-demo/info2html?(zsh)Recent%2520Directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
