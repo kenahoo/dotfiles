@@ -11,6 +11,25 @@ alias d='git diff'
 alias ds='git diff --staged'
 alias l='git lg'
 alias la='git lg --all'
+
+# Local branches with at least one commit by me not on main
+function my_branches() {
+    local mainbr=main
+    local me
+    me=$(git config user.email) || return $?
+    local b
+    for b in $(git for-each-ref --format='%(refname:short)' refs/heads); do
+        [[ "$b" == "$mainbr" ]] && continue
+        if git log "$mainbr..$b" --author="$me" -1 --format=%H 2>/dev/null | grep -q .; then
+            echo "$b"
+        fi
+    done
+}
+
+# "list mine": graph log of HEAD + main + branches I've committed to (off main)
+function lm() {
+    git lg HEAD main $(my_branches) "$@"
+}
 alias a='git add -p'
 alias dup='git dup'
 alias co='git checkout'
