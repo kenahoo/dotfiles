@@ -311,8 +311,15 @@ mcd() {
 
 function cdpop() {
     # See https://superuser.com/questions/1565148/popd-for-cdr-based-directory-management-in-zsh/1565507#1565507
-    local dir="$PWD"
-    cdr
+
+    local dir="$PWD" top
+    while top=$(cdr -l | head -1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//'); do
+        [[ -z $top ]] && return 1
+        [[ -d ${~top} ]] && break
+        cdr -P "$top" || return 1
+    done
+    cdr || return 1
+
     cdr -P "$dir"
 }
 
