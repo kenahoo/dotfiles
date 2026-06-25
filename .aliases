@@ -309,18 +309,19 @@ mcd() {
     mkdir -p $1 && cd $1
 }
 
-function cdpop() {
+function cdpop () {
     # See https://superuser.com/questions/1565148/popd-for-cdr-based-directory-management-in-zsh/1565507#1565507
 
-    local dir="$PWD" top
-    while top=$(cdr -l | head -1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//'); do
-        [[ -z $top ]] && return 1
-        [[ -d ${~top} ]] && break
-        cdr -P "$top" || return 1
+    local dir="$PWD" i
+    local -a reply
+    cdr -r
+    for ((i = 1; i <= ${#reply}; i++)); do
+        [[ $reply[i] != $dir && -d $reply[i] ]] || continue
+        cdr $i
+        cdr -P "$dir" 2>/dev/null
+        return
     done
-    cdr || return 1
-
-    cdr -P "$dir"
+    return 1
 }
 
 alias ls='ls -F'
